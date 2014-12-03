@@ -1,0 +1,72 @@
+@CHARSET "UTF-8";
+#damc table {
+	border:1px solid #3CF;
+}
+
+#damc table th {
+	text-align:center;
+	border-top:1px solid #3CF;
+	border-bottom:3px solid #3CF;
+	border-right:1px solid #3CF;
+	background-color:#C6F9AA;
+	color:#00BD5F;
+	font-size:15px;
+}
+#damc table td {
+	font-size:14px;
+	padding:5px;
+}
+#damc table td a {
+	text-decoration:none;
+	color:blue;
+}
+#damc table td a:hover {
+	text-decoration:underline;
+	color:#C60;
+}
+#damc table td.view {
+	text-align:center;
+}
+tr.changeColor {
+	background-color:#FFC;
+}
+#damc {
+	margin:0 auto;
+	padding:3px;
+	height:400px;
+}
+#damc p {
+	margin:5px 0;
+	padding:0;
+	font-size:15px;
+	padding-left:20px;
+	background-image:url("../images/search_result.gif");
+	background-repeat:no-repeat;
+	background-position:left center;
+}
+#damc #page {
+	margin-top:3px;
+	padding-top:10px;
+	padding-right:50px;
+	height:50px;
+}
+#damc #page a {
+	margin:3px;
+	float:right;
+	font-size:13px;
+	display:block;
+	background-color:#9C3;
+	width:50px;
+	height:20px;
+	text-align:center;
+	vertical-align:middle;
+	text-decoration:none;
+}
+#damc #page a:hover {
+	border:1px solid gray;
+}
+#damc #page span {
+	display:block;
+	float:right;
+	margin-left:5px;
+}

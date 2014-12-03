@@ -1,0 +1,190 @@
+.bggray {
+	BACKGROUND-COLOR: #e7e7e7
+}
+.top {
+	BACKGROUND-COLOR: #FFFFFF;
+}
+TD {
+	FONT-SIZE: 12px;
+	font-family: "Arial", "Helvetica", "sans-serif";
+}
+.tmenu {
+	COLOR: #FFFFFF; TEXT-DECORATION: none;
+}
+A.tmenu:hover {
+	COLOR: #FFCC00
+}
+.tmenu2 {
+	COLOR: #000000;TEXT-DECORATION: none;
+}
+A.tmenu2:hover {
+	COLOR: #336600
+}
+.link {
+	COLOR: #004F92; TEXT-DECORATION: underline
+}
+A.link:hover {
+	COLOR: #004F92
+}
+.hover {
+	BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #ffffff 1px solid; BORDER-LEFT: #ffffff 1px solid; BORDER-BOTTOM: #ffffff 1px; BACKGROUND-COLOR: #00699c
+}
+.bar {
+	BACKGROUND-COLOR:#090;
+}
+body {
+}
+
+.secmenu {
+	COLOR:#009; TEXT-DECORATION: none
+}
+.secmenuhov {
+	FONT-WEIGHT: bold; COLOR: #0033FF; TEXT-DECORATION: none
+}
+A.secmenu:hover {
+	COLOR: #a10333
+}
+.thirmenu {
+	BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; BORDER-LEFT: #000000 1px solid; BORDER-BOTTOM: #000000 1px solid; BACKGROUND-COLOR: #F1F1F1
+}
+.thirmenuhov {
+	BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-WEIGHT: bold; BORDER-LEFT: #000000 1px solid; COLOR: #feeea2; BORDER-BOTTOM: #000000 1px; BACKGROUND-COLOR: #F1F1F1
+}
+SELECT {
+	BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #666666 1px solid; FONT-SIZE: 12px; BORDER-LEFT: #666666 1px solid; BORDER-BOTTOM: #ffffff 1px solid; BACKGROUND-COLOR: #F1F1F1
+}
+
+TEXTAREA {
+	BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #666666 1px solid; FONT-SIZE: 12px; BORDER-LEFT: #666666 1px solid; BORDER-BOTTOM: #ffffff 1px solid; BACKGROUND-COLOR: #F1F1F1
+}
+.button {
+	BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #9BD583 1px solid; BORDER-LEFT: #9BD583 1px solid; BORDER-BOTTOM: #000000 1px solid; BACKGROUND-COLOR: #A10333
+}
+.left {
+	BACKGROUND-COLOR: #f8eef1
+}
+.leftcolor {
+	BACKGROUND-COLOR:#090;
+	PADDING-LEFT:12px;
+}
+.menucolor {
+	BACKGROUND-COLOR: #FFFFFF;
+}
+.logofont {
+	FONT-WEIGHT: bold; FONT-SIZE: 22px; COLOR: #ffffff; FONT-STYLE: italic; FONT-FAMILY: "Tahoma", "Arial"
+}
+.pane2hov {
+	COLOR: #000000; BACKGROUND-COLOR: #feeea2
+}
+.listtab {
+	BACKGROUND-COLOR: #ffffff
+}
+.listsorttitle {
+	FONT-WEIGHT: bold; COLOR: #ffffff; BACKGROUND-COLOR: #00699c; TEXT-DECORATION: underline
+}
+.listtitle {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; FONT-WEIGHT: bold; BORDER-LEFT: 0px; COLOR: #000000; BORDER-BOTTOM: 0px; BACKGROUND-COLOR: #00699c; 
+	text-align:center;
+}
+.listtitlehov {
+	FONT-WEIGHT: bold; COLOR: #000000; TEXT-DECORATION: underline
+}
+A.listtitle:hover {
+	COLOR: #feeea2
+}
+.wit {
+	BORDER-RIGHT: medium none; BORDER-TOP: medium none; FONT-SIZE: 12px; BORDER-LEFT: medium none; BORDER-BOTTOM: medium none; BACKGROUND-COLOR: #fffffe
+}
+TR.H {
+	BACKGROUND-COLOR: #e7e7e7
+}
+.chkH {
+	BORDER-RIGHT: medium none; BORDER-TOP: medium none; FONT-SIZE: 12px; BORDER-LEFT: medium none; BORDER-BOTTOM: medium none; BACKGROUND-COLOR: #e7e7e7
+}
+.fourmenu {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A.fourmenu:hover {
+	COLOR: #01457c
+}
+.font {
+	FONT-WEIGHT: normal; FONT-SIZE: 8px; VERTICAL-ALIGN: 120%; COLOR: #ffffff; FONT-STYLE: italic; FONT-FAMILY: "Tahoma", "Arial"
+}
+.pagenum {
+	TEXT-DECORATION: none
+}
+A.pagenum:hover {
+	COLOR: #feeea2
+}
+A.page:link {
+	TEXT-DECORATION: none
+}
+A.page:hover {
+	
+}
+A.page:visited {
+	TEXT-DECORATION: none
+}
+A.page:active {
+	TEXT-DECORATION: underline
+}
+.leftlink {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A.leftlink:hover {
+	FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+.alart {
+	COLOR: #ff0000
+}
+.note {
+	COLOR: #999999
+}
+.defbutton {
+	BORDER-RIGHT: medium none; BORDER-TOP: medium none; BORDER-LEFT: medium none; BORDER-BOTTOM: medium none; BACKGROUND-COLOR: #ffffff
+}
+.default {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #ff6600; FONT-FAMILY: "Arial", "tahoma", "sans-serif"
+}
+.tab {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 0px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px
+}
+.tab_a {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 0px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; background-color: #ECCDD5
+}
+.fontitle{
+	FONT-WEIGHT: bold; COLOR: #000000
+}
+.fcol{	
+	FONT-WEIGHT: bold; COLOR: #000000
+	}
+.bord {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; PADDING-BOTTOM: 0px; WIDTH: 80px; PADDING-TOP: 3px; HEIGHT: 18px; BACKGROUND-COLOR: #ffffff
+}
+
+.chosd {  background-color: #336BA0; }
+.chosdfont { color: #FFFFFF; font-size:14px }
+.pane	{font-family:"����", "MS SONG", "SimSun", "tahoma", "sans-serif"; font-size:12px;background: #F8eef1;border-bottom: none;border-right: none;border-left: none;border-top:none}
+.wit {font-family:����,MS SONG,SimSun,tahoma,sans-serif; font-size:12px;background-color:#FFFFFE;border-bottom: none;border-right: none;border-left: none;border-top:none}
+.FormLeft{
+	background-color:#F2F2F2;
+}
+.FormRight{
+	background-color:#FFFFFF;
+}
+.border{
+	background-color:#D9DDE1;
+}
+.toolbutton {
+	background-color: #D4EDFF;
+	border: 1px solid #5A89AA;
+	color: #154979;
+	height: 18px;
+	width: 70px;
+	padding-top: 1px;
+	margin-top: 1px;
+
+}
+.toolTD{
+	border: 1px solid #5A89AA;
+}

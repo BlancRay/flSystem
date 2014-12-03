@@ -1,0 +1,62 @@
+@CHARSET "UTF-8";
+#training h1,#addNewTraining h1,#updateTraining h1,#sign_up h1,#listPxcjryxx h1,#myTraining h1 {
+	margin:0;
+	padding:0;
+	text-align:center;
+}
+#addNewTraining #submit_button,#updateTraining #submit_button,#sign_up #submit_button,#listPxcjryxx #submit_button {
+	text-align:center;
+	margin:10px 0;
+}
+#addNewTraining #newTraining #relative,#updateTraining #newTraining #relative {
+	position:relative;
+}
+#addNewTraining #newTraining #relative #selected_zj,#updateTraining #newTraining #relative #selected_zj {
+	position:absolute;
+	left:80px;
+	top:0;
+}
+#addNewTraining #newTraining #relative #tips,#updateTraining #newTraining #relative #tips {
+	position:absolute;
+	right:0;
+	bottom:-8px;
+}
+
+#page {
+	width:900px;
+	margin:5px auto;
+}
+
+#showDetail {
+	margin:5px auto;
+	border:1px solid green;
+	background-color:#EBEBEB;
+	width:800px;
+}
+#showDetail h2 {
+	margin:5px 0;
+	padding:0;
+	text-align:center;
+	font-size:20px;
+}
+#showDetail h3 {
+	margin:0;
+	padding:0;
+	text-align:center;
+	font-weight:normal;
+}
+#showDetail p {
+	font-size:17px;
+	font-family:"黑体";
+	padding:0;
+	margin:5px 10px;
+}
+#showDetail #zy,#showDetail #nr {
+	width:700px;
+	margin:0 auto;
+	font-size:15px;
+}
+#showDetail #return {
+	text-align:right;
+	padding:10px 60px;
+}
