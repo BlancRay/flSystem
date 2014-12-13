@@ -9,7 +9,7 @@
 <title>导师信息导入</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css"
-	href="${contextPath}/js/jquery-easyui-1.4/themes/default/easyui.css">
+	href="${contextPath}/js/jquery-easyui-1.4/themes/metro/easyui.css">
 <link rel="stylesheet" type="text/css"
 	href="${contextPath}/js/jquery-easyui-1.4/themes/icon.css">
 <script type="text/javascript"

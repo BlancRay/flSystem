@@ -5,7 +5,7 @@
 <head>
 <base target="mainframe">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="../js/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../js/easyui/themes/metro/easyui.css">
 <link rel="stylesheet" type="text/css" href="../js/easyui/themes/icon.css">
 <link rel="stylesheet" type="text/css" href="../css/main.css">
 <script type="text/javascript" src="../js/jquery.min.js"></script>

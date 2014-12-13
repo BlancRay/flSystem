@@ -28,14 +28,14 @@ body {
 			if ($("#userName").val() == "") {
 				alert("请输入用户名...");
 				$("#userName").focus();
-				event.preventDefault();
+				event.preventmetro();
 				return;
 			}
 
 			if ($("#passwd").val() == "") {
 				alert("请输入密码...");
 				$("#passwd").focus();
-				event.preventDefault();
+				event.preventmetro();
 				return;
 			}
 
