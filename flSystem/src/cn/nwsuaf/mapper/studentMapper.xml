@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="student">
+	<!-- 列表 -->
+    <select id="stulist" parameterType="map" resultType="map">
+    	SELECT 
+		   stu.loginName,stu.uName,stu.sex,stu.className,stu.grade,stu.sixGrade,stu.checked,sp.specialtyName
+		FROM fl_student stu
+		LEFT JOIN fl_specialty sp ON sp.specialtyID = stu.specialtyID
+		<if test="where != null">
+			where ${where}
+		</if>
+		LIMIT #{offset},#{pgSize}
+    </select>
+    <!-- 记录条数 -->
+    <select id="stuNum" parameterType="map" resultType="int">
+    	select count(loginName) from fl_student
+    	<if test="where != null">
+			where ${where}
+		</if>
+    </select>
+    
+    <!-- 编辑 -->
+    <select id="stuByid" parameterType="String" resultType="map">
+    	SELECT 
+		   stu.*,sp.specialtyName
+		FROM fl_student stu
+		LEFT JOIN fl_specialty sp ON sp.specialtyID = stu.specialtyID
+		where stu.loginName = #{loginName}
+    </select>
+    
+    <!-- 添加 -->
+    <insert id="stuInsert" parameterType="map">
+    	insert fl_student
+    	set
+    		loginName = #{loginName},
+    		grade = #{grade},
+			className = #{className},
+			specialtyID = #{specialtyID},
+			sixGrade = #{sixGrade},
+			uName = #{uName},
+			sex = #{sex}
+    </insert>
+    
+    <!-- 更新 -->
+    <update id="stuUpdate" parameterType="map">
+    	update fl_student
+    	set
+    		loginName = #{loginName},
+    		grade = #{grade},
+			className = #{className},
+			specialtyID = #{specialtyID},
+			sixGrade = #{sixGrade},
+			uName = #{uName},
+			sex = #{sex}
+		where loginName = #{oldLoginName}
+    </update>
+    
+    <!-- 重置口令 -->
+    <update id="resetPasswd" parameterType="String">
+    	
+    </update>
+    
+    <!-- 按条件删除 -->
+    <delete id="deleteByWhere" parameterType="String">
+    	
+    </delete>
+    
+    <!-- 按登录名删除 -->
+    <delete id="deleteByLoignname"  parameterType="String">
+    	delete from fl_user where loginName=#{loginname}
+    </delete>
+    
+    <!-- 年级列表 -->
+    <select id="gradeList" resultType="map">
+		SELECT grade FROM fl_student GROUP BY grade ORDER BY grade DESC        
+    </select>
+</mapper>
