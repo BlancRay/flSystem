@@ -33,9 +33,6 @@
 .panel-body-noborder {
   border-width: 0px;
 }
-.panel-body-nobottom {
-  border-bottom-width: 0;
-}
 .panel-with-icon {
   padding-left: 18px;
 }
@@ -126,14 +123,6 @@
   height: 16px;
   line-height: 16px;
 }
-.panel-footer {
-  border: 1px solid #ddd;
-  overflow: hidden;
-  background: #fff;
-}
-.panel-footer-noborder {
-  border-width: 1px 0 0 0;
-}
 .accordion {
   overflow: hidden;
   border-width: 1px;
@@ -192,9 +181,6 @@
 }
 .window .window-body-noheader {
   border-top-width: 1px;
-}
-.window .panel-body-nobottom {
-  border-bottom-width: 0;
 }
 .window .window-header .panel-icon,
 .window .window-header .panel-tool {
@@ -257,11 +243,6 @@
 .window-proxy-mask,
 .window-mask {
   background: #eee;
-}
-.window .panel-footer {
-  border: 1px solid #ddd;
-  position: relative;
-  top: -1px;
 }
 .dialog-content {
   overflow: auto;
@@ -511,7 +492,6 @@
   border: 0;
   margin: 0;
   padding: 4px;
-  white-space: normal;
   vertical-align: top;
   outline-style: none;
   resize: none;
@@ -556,7 +536,6 @@
   opacity: 0.6;
   filter: alpha(opacity=60);
   text-decoration: none;
-  outline-style: none;
 }
 .textbox-icon-disabled,
 .textbox-icon-readonly {
@@ -581,6 +560,7 @@
 }
 .filebox .textbox-value {
   vertical-align: top;
+  visibility: hidden;
   position: absolute;
   top: 0;
   left: -5000px;
@@ -637,9 +617,6 @@
 }
 .combo-arrow:hover {
   background-color: #E6E6E6;
-}
-.combo .textbox-icon-disabled:hover {
-  cursor: default;
 }
 .textbox-invalid {
   border-color: #ffa8a8;
@@ -1720,7 +1697,6 @@
   height: 10px;
   width: 100%;
   height: 50%;
-  outline-style: none;
 }
 .spinner-arrow-hover {
   background-color: #E6E6E6;
@@ -1738,7 +1714,6 @@
   opacity: 0.6;
   filter: alpha(opacity=60);
   background-color: #ffffff;
-  cursor: default;
 }
 .spinner .textbox-icon-disabled {
   opacity: 0.6;

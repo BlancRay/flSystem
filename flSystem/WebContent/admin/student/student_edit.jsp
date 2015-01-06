@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -76,7 +76,7 @@
 </head>
 <body>
 	<div class="center800" >
-		<form action="student_save" ajax="false" class="easyui-form" id="frm">
+		<form action="student_save" method="post" ajax="false" class="easyui-form" id="frm">
 			<table class="detailBorder" border="2" width="400">
 				<caption class="firstTitle">添加/编辑学生信息</caption>
 				<tr>
@@ -92,8 +92,12 @@
 					<td><s:select list="{'男','女'}" name="stuInfo.sex"/> </td>
 				</tr>
 				<tr>
+					<th>学科分类：</th>
+					<td><s:select id="spec" name="stuInfo.bigclassId" list="bcMap" listKey="value" listValue="key" headerKey="NULL" headerValue="选择学科分类"  required="true"></s:select> </td>
+				</tr>
+				<tr>
 					<th>专业：</th>
-					<td><s:select id="spec" name="stuInfo.specialtyID" list="specMap" listKey="value" listValue="key" headerKey="" headerValue="选择专业"  required="true"></s:select> </td>
+					<td><s:select name="stuInfo.specialtyID" list="specMap" listKey="value" listValue="key" headerKey="" headerValue="选择专业"></s:select> </td>
 				</tr>
 				<tr>
 					<th>年级：</th>
@@ -106,6 +110,14 @@
 				<tr>
 					<th>六级成绩：</th>
 					<td><s:textfield name="stuInfo.sixGrade" max="800" min="0" precision="1" size="6" cssClass="easyui-numberbox" required="true"/></td>
+				</tr>
+				<tr>
+					<th>学分成绩：</th>
+					<td><s:textfield name="stuInfo.creditscore" max="800" min="0" precision="1" size="6" cssClass="easyui-numberbox" required="true"/></td>
+				</tr>
+				<tr>
+					<th>有无违纪：</th>
+					<td><s:select name="stuInfo.discipline" list="{'无','有' }" /></td>
 				</tr>
 			</table>
 			<input name="stuInfo.oldLoginName" value="${loginName}" type="hidden"/>

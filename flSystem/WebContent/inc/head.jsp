@@ -30,10 +30,10 @@
 	
 	</div>
 	<div>
-		<a href="../notice_list" class="easyui-linkbutton" plain="true">系统公告</a>
-		<a href="javascript:" class="easyui-linkbutton" plain="true">站内短信</a>
-		<a href="javascript:" class="easyui-linkbutton" plain="true">口令修改</a>
-		<a href="javascript:" class="easyui-linkbutton" plain="true">个人信息</a>
-		<a href="javascript:" class="easyui-linkbutton" plain="true">使用指南</a>
+		<a href="../notice_list" class="easyui-linkbutton topBtn" plain="true">系统公告</a>
+		<a href="javascript:" class="easyui-linkbutton topBtn" plain="true">站内短信</a>
+		<a href="javascript:" class="easyui-linkbutton topBtn" plain="true">口令修改</a>
+		<a href="personInfo.html" class="easyui-linkbutton topBtn" plain="true">个人信息</a>
+		<a href="javascript:" class="easyui-linkbutton topBtn" plain="true">使用指南</a>
 	</div>
 </div>

@@ -3,9 +3,8 @@
 <configuration>
 	<properties resource="jdbcInfo.properties" />
 	<typeAliases>
-		<typeAlias type="cn.nwsuaf.bean.LoginUserBean" alias="LoginUserBean" />
+		<typeAlias type="cn.nwsuaf.bean.UserBean" alias="UserBean" />
 		<typeAlias type="cn.nwsuaf.bean.NoticeBean" alias="NoticeBean" />
-		<typeAlias type="cn.nwsuaf.bean.TutorListBean" alias="TutorListBean"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -26,7 +25,8 @@
 	<mappers>
 		<!-- 外部SQL映射文件-->
 		<mapper resource="cn/nwsuaf/mapper/noticeMapper.xml" />
-		<mapper resource="cn/nwsuaf/mapper/loginMapper.xml" />
-		<mapper resource="cn/nwsuaf/mapper/tutorlistMapper.xml" />
+		<mapper resource="cn/nwsuaf/mapper/studentMapper.xml" />
+		<mapper resource="cn/nwsuaf/mapper/userMapper.xml" />
+		<mapper resource="cn/nwsuaf/mapper/baseInfoMapper.xml" />
 	</mappers>
 </configuration>

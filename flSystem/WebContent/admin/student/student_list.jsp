@@ -108,11 +108,13 @@
 <title>学生信息列表</title>
 </head>
 <body>
-	<div class="center800">
+	<div class="center1000">
 		<div class="firstTitle">学生信息列表</div>
 		<div class="toolbar">
 			<a class="easyui-linkbutton" iconCls="icon-add" href="student_add">添加</a>
+			<!-- 
 			<a class="easyui-linkbutton" iconCls="icon-remove">删除符合条件</a>
+			 -->
 			<div style="margin-top: 10px">
 			筛选条件：
 			<s:select id="spec" list="specMap" listKey="value" listValue="key" headerKey="-1" headerValue="所有专业" value="specId"></s:select>
@@ -126,13 +128,15 @@
 		<table class="listBorder" width="100%" cellspacing="0">
 			<tr>
 				<th width="80">学号</th>
-				<th width="100">姓名</th>
-				<th  width="30">性别</th>
-				<th  width="100">班级</th>
-				<th  width="50">年级</th>
-				<th width="100">专业</th>
+				<th>姓名</th>
+				<th width="30">性别</th>
+				<th width="100">班级</th>
+				<th width="50">年级</th>
+				<th width="160">学科大类</th>
 				<th width="60">六级成绩</th>
-				<th>操作</th>
+				<th width="50">学分成绩</th>
+				<th width="50">有无违纪</th>
+				<th width="180">操作</th>
 			</tr>
 			<s:iterator value="stuList.recs" var="stu">
 				<tr>
@@ -141,8 +145,10 @@
 					<td>${stu.sex }</td>
 					<td>${stu.className }</td>
 					<td>${stu.grade }</td>
-					<td>${stu.specialtyName }</td>
+					<td>${stu.bigClassName }</td>
 					<td>${stu.sixGrade }</td>
+					<td>${stu.creditscore }</td>
+					<td>${stu.discipline }</td>
 					<td>
 						<a class="easyui-linkbutton editBtn" iconCls="icon-edit" href="student_edit?loginName=${stu.loginName}">编辑</a>
 						<a class="easyui-linkbutton delBtn" iconCls="icon-cancel" href="javascript:void(0)" stuid="${stu.loginName }">删除</a>

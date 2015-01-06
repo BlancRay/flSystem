@@ -7,18 +7,20 @@ public class BaseAction {
 	private int page; //请求的页面号
 	private int rows; //页面大小
 	
+	
 	public BaseAction(){
 		contextPath=ServletActionContext.getServletContext().getContextPath();
 	}
 	public int getPage() {
+		if(page <= 0) page = 1;
 		return page;
 	}
 	public void setPage(int page) {
-		if(page == 0) page = 1;
+		
 		this.page = page;
 	}
 	public int getRows() {
-		if(rows == 0)rows = 10;
+		if(rows <= 0)rows = 10;
 		return rows;
 	}
 	public void setRows(int rows) {
@@ -26,5 +28,6 @@ public class BaseAction {
 	}
 	public String getContextPath() {
 		return contextPath;
-	}	
+	}
+	
 }

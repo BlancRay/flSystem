@@ -91,6 +91,5 @@
 		<a href="javascript:void(0)" id="batchDelBtn" disabled="true"
 			class="easyui-linkbutton" iconCls="icon-cancel" onclick="batchDel()">取消申请</a>
 	</div>
-
 </body>
 </html>

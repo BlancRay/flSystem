@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<!-- 教师 -->
+<struts>
+	 <package name="tutor" extends="default" namespace="/tutor">
+	 	<!-- 教师首页 -->
+		<action name="index">
+			<result>/tutor/index.jsp</result>
+		</action>
+		<!-- 文件上传 -->
+		<action name="file_*" class="cn.nwsuaf.util.FileUploadAction" method="{1}">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 系统公告 -->
+		<action name="notice_*" class="cn.nwsuaf.action.admin.NoticeAdminAction" method="{1}">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		
+		<!-- 用户信息 -->
+		<action name="user_*" class="cn.nwsuaf.action.admin.UserAction" method="{1}">
+			<result name="exist" type="json" />		    
+		</action>
+    </package>
+</struts>

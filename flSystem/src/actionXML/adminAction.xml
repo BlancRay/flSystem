@@ -27,6 +27,9 @@
 			<result name="list">
 				/admin/student/student_list.jsp
 			</result>
+			<result name="list1">
+				/admin/student/student_list1.jsp
+			</result>			
 			<result name="edit">
 				/admin/student/student_edit.jsp
 			</result>

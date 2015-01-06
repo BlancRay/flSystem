@@ -45,7 +45,17 @@ public class StudentAction extends BaseAction {
 		}
 		return "list";
 	}
-	
+	public String list1(){
+		try {
+			stuList = stuDao.getStuList(createWhere(), getPage(), getRows());
+			specMap = DataPacked.specMap();
+			gradeList = stuDao.getGradeInfo();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "list1";
+	}	
 	public String add(){
 		try {
 			specMap = DataPacked.specMap();

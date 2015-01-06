@@ -12,7 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 public class BaseDao {
 	
-	public SqlSession getSqlSession() throws Exception{
+	protected SqlSession getSqlSession() throws Exception{
 		SqlSessionFactory sf = SqlMapperFactory.getSqlSessionFactory();
 		if(sf == null){
 			throw new Exception("创建SqlSessionFactory实例失败");

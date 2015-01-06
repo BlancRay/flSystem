@@ -14,44 +14,34 @@
 <script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript"
 	src="js/easyui/locale/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src="js/notice_list.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
 <title>分流管理系统</title>
 </head>
 <body class="easyui-layout">
-	<div id="topFrame" data-options="region:'north',border:false">
-		<jsp:include page="inc/head1.jsp" />
-	</div>
-	<div data-options="region:'center',border:false,onResize:pRelocation"
-		id="centerFrame">
-		<div id="commonFrame" class="easyui-panel" border="false">
-			<div id="noticeFrame" class="easyui-panel" border="false">
-				<img src="images/noticeIco.png"><img
-					src="images/noticeTitle.png">
-				<hr width="90%" color="#ccc" style="margin: 5px">
-				<div class="notice">
-					<s:iterator value="result.rows" var="row">
-						<dl>
-							<dt>${row.pdate}</dt>
-							<dd>
-								<a target="_blank" href="notice_detail?noticeID=${row.noticeID}">${row.title}</a>
-							</dd>
-						</dl>
-					</s:iterator>
-				</div>
-
-				<div id="pgNav" class="easyui-pagination"
-					data-options="
+	<div class="easyui-panel" border="false">
+		<div id="noticeFrame" class="easyui-panel" border="false">
+			<img src="images/noticeIco.png"><img
+				src="images/noticeTitle.png">
+			<hr width="100%" color="#ccc" style="margin: 5px">
+			<div class="notice">
+				<s:iterator value="result.rows" var="row">
+					<dl>
+						<dt>${row.pdate}</dt>
+						<dd>
+							<a target="_blank" href="notice_detail?noticeID=${row.noticeID}">${row.title}</a>
+						</dd>
+					</dl>
+				</s:iterator>
+			</div>
+			<div id="pgNav" class="easyui-pagination"
+				data-options="
 					total:${result.total},
 					pageSize:15,
 					pageNumber:${page},
 					layout:['first','prev','links','next','last'],
 					onSelectPage:toPage
 				"></div>
-			</div>	
 		</div>
-	</div>
-	<div id="bottomFrame" data-options="region:'south',border:false">
-		<jsp:include page="inc/foot.jsp" />
 	</div>
 </body>
 </html>

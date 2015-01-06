@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%
+<%
 	pageContext.setAttribute("contextPath", request.getContextPath());
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -9,21 +9,24 @@
 <title>导师信息导入</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css"
-	href="${contextPath}/js/jquery-easyui-1.4/themes/metro/easyui.css">
+	href="${contextPath}/js/easyui/themes/metro/easyui.css">
 <link rel="stylesheet" type="text/css"
-	href="${contextPath}/js/jquery-easyui-1.4/themes/icon.css">
+	href="${contextPath}/js/easyui/themes/icon.css">
 <script type="text/javascript"
-	src="${contextPath}/js/jquery-easyui-1.4/jquery.min.js"></script>
+	src="${contextPath}/js/easyui/jquery.min.js"></script>
 <script type="text/javascript"
-	src="${contextPath}/js/jquery-easyui-1.4/jquery.easyui.min.js"></script>
-	<script type="text/javascript"
-	src="${contextPath}/js/jquery-easyui-1.4/locale/easyui-lang-zh_CN.js"></script>
+	src="${contextPath}/js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript"
+	src="${contextPath}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="${contextPath}/js/kindeditor/kindeditor-all-min.js"></script>
+<script type="text/javascript" src="${contextPath}/js/fileupload.js"></script>
 <script>
 	var sex = [ {
-		sextype : 'male',
+		sextype : '男',
 		name : '男'
 	}, {
-		sextype : 'female',
+		sextype : '女',
 		name : '女'
 	}, ];
 	$(function() {
@@ -152,6 +155,7 @@
 </script>
 </head>
 <body>
+	<div class="center800">
 	<h2>手动导入信息</h2>
 
 	<div style="margin: 10px 0">
@@ -160,10 +164,19 @@
 
 	<table id="tt"></table>
 	<h2>格式化导入</h2>
-	<form action="UploadFile.action" method="post"
-		enctype="multipart/form-data" id="uploadForm">
-		选择要上传的文件：<input type="file" name="file" size="50"><br>
-		<input type="submit" value="上传">
-	</form>
+
+		<form id="fileUpload" action="../student_upload" method="post"
+			enctype="multipart/form-data">
+			上传待导入的Excel文件：<br /> <input id="fb" name="upload"
+				class="easyui-filebox" style="width: 300px"
+				data-options="buttonText:'请选择文件...'"> <a
+				href="javascript:void(0)" class="easyui-linkbutton"
+				data-options="iconCls:'icon-redo'" onclick="uploadFile()">导入</a> <a
+				href="${contextPath}/template/studentInfo.xls">下载学生信息模板</a>
+		</form>
+		<div style="margin-left: 100px; margin-top: 40px;">
+			<pre id="msg"></pre>
+		</div>
+	</div>
 </body>
 </html>

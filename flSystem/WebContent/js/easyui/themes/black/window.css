@@ -16,9 +16,6 @@
 .window .window-body-noheader {
   border-top-width: 1px;
 }
-.window .panel-body-nobottom {
-  border-bottom-width: 0;
-}
 .window .window-header .panel-icon,
 .window .window-header .panel-tool {
   top: 50%;
@@ -86,9 +83,4 @@
 .window-proxy-mask,
 .window-mask {
   background: #000;
-}
-.window .panel-footer {
-  border: 1px solid #000;
-  position: relative;
-  top: -1px;
 }
