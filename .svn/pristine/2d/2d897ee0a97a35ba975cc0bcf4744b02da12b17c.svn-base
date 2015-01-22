@@ -1,0 +1,119 @@
+@CHARSET "UTF-8";
+#loginBox{
+	width: 300px;
+	background-color: #EEF0F2;
+	height: 370px;
+	padding-top: 60px;
+	background-image: url('../images/loginFormBg.png');
+	position: absolute;
+	right: 10px;
+	top: 0px;	
+}
+
+#userNameBox,#passwdBox{
+	margin: 25px auto;
+	background-image: url("../images/mainbg.png");
+	background-position:0px -352px;
+	width: 245px;
+	height:42px;
+}
+#checkCodeOutBox{
+	margin: 25px auto;
+	width: 245px;
+	height:42px;
+}
+#checkCode{
+	width: 70px;
+	height:42px;
+	border: 1px gray solid;
+	font-size: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius:5px;
+}
+
+#usrName,#passwd{
+	margin:2px;
+	width: 200px;
+	line-height: 36px;
+	height:34px;
+	border: none;
+	font-size: 20px;
+	padding-left: 30px;
+}
+#usrName{
+	background-image: url("../images/mainbg.png");
+	background-position:-160px -50px;
+}
+
+#passwd{
+	background-image: url("../images/mainbg.png");
+	background-position:0px 5px;
+}
+
+#commonFrame{
+	margin: 0px auto;
+	position: relative;
+	height:450px;
+	width:1000px!important;
+}
+
+#noticeFrame{
+	width: 650px!important;
+	height: 430px;
+	position: relative;
+	background-color: #FCFEFC;
+	padding: 10px;
+}
+
+#pgNav{
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	width: 550px;
+}
+
+#loginBtn{
+	cursor: pointer;
+}
+
+#loginBtnBox{
+	margin-top:35px;
+	text-align: center;
+}
+
+.notice dl{
+	line-height: 20px;
+	padding-left: 20px;
+	padding-right: 10px;
+	
+}
+.notice dt{
+	float: right;
+	width: 120px;
+}
+
+.title{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#noticeDetail{
+	margin: 0px auto;
+	width: 900px;
+	height: 100%;
+	background-color: #FCFEdC;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#noticeDetail dt{
+	padding: 10px;
+	text-align: center;
+	line-height: 2;
+}
+
+#noticeDetail dd{
+	text-indent: 2em;
+	line-height: 2;
+}

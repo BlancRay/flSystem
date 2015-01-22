@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<!-- 管理员 -->
+<struts>
+	 <package name="student" extends="default"  namespace="/student">
+	 	<action name="fileUpload" method="upload" class="cn.nwsuaf.util.FileUploadAction">
+	 	    <result type="json">
+	 	        <param name="root">result</param>
+	 	    </result>
+	 	</action>
+	 	
+	 	<action name="stu_*" method="{1}" class="cn.nwsuaf.action.student.StudentAction">
+	 	    <result name="selfRec">
+	 	        /student/self_rec.jsp
+	 	    </result>
+	 	    <result name="personInfo">
+	 	        /student/personInfo.jsp
+	 	    </result>
+	 	    <result name="jsonAction" type="json">
+	 	        <param name="root">result</param>
+	 	    </result>
+	 	</action>
+    </package>
+</struts>

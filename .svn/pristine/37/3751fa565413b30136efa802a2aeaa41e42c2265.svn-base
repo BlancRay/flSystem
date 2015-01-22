@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notice">
+	<!-- 添加 -->
+    <insert id="noticeInsert" parameterType="NoticeBean">
+    	insert fl_notice
+    	set
+    		title = #{title},
+    		content = #{content},
+    		pdate = now()
+    </insert>
+    <!-- 更新 -->
+    <update id="noticeUpdate" parameterType="NoticeBean">
+    	update fl_notice
+    	set
+    		title = #{title},
+    		content = #{content}
+    	where
+    		noticeID = #{noticeID}
+    </update>
+    
+    <!-- 编辑 -->
+    <select id="noticeEdit" parameterType="int" resultType="map">
+    	select 
+    		noticeID,
+    		title,
+    		content
+    	from fl_notice
+    	where
+    		noticeID = #{noticeID} 
+    </select>
+    <!-- 更新阅读次数 -->
+    <update id="noticeUpdateSkim" parameterType="int">
+    	update fl_notice
+    	set
+    		skipNum = skipNum + 1
+    	where
+    		noticeID = #{noticeID}
+    </update>
+    <!-- 删除 -->
+    <delete id="noticeDelete" parameterType="string">
+    	delete from fl_notice where noticeID in (${ids})
+    </delete>
+    <!-- 分页查询 -->
+    <select id="getNoticeByPage" parameterType="map" resultType="map">
+    	select 
+    		noticeID,
+    		title,
+    		DATE_FORMAT(pdate,'%Y-%m-%d %T') pdate,
+    		noticeID id 
+    	from fl_notice 
+    	order by noticeID DESC 
+    	limit #{offset},#{pgSize}
+    </select>
+    
+    <!-- 记录条数 -->
+    <select id="getCount" resultType="int">
+    	select count(noticeID) from fl_notice
+    </select>
+    
+    <!-- 按noticeID查询 -->
+    <select id="getNoticeByID" parameterType="int" resultType="map">
+    	select 
+    		noticeID,
+    		title,
+    		content,
+    		DATE_FORMAT(pdate,'%Y-%m-%d %T') pdate,
+    		skipNum
+    	from fl_notice where noticeID = #{id}
+    </select>
+</mapper>
