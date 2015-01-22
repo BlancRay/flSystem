@@ -21,8 +21,6 @@
 				<param name="root">result</param>
 			</result>
 		</action>
-		
-		
 		<!-- 用户信息 -->
 		<action name="user_*" class="cn.nwsuaf.action.admin.UserAction" method="{1}">
 			<result name="exist" type="json" />		    

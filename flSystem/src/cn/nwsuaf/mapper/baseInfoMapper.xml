@@ -5,4 +5,9 @@
     <select id="specInfo" resultType="map">
     	select specialtyID,specialtyName from fl_specialty
     </select>
+    
+    <!-- 学科分类 -->
+    <select id="bigClassInfo" resultType="map">
+        select `bigClassID`,`bigClassName` from fl_bigclassname
+    </select>
 </mapper>

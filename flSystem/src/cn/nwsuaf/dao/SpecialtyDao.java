@@ -8,4 +8,9 @@ public class SpecialtyDao extends BaseDao {
 	public ArrayList<HashMap<String,String>> specList() throws Exception{
 		return (ArrayList<HashMap<String, String>>) getList("baseInfo.specInfo");
 	}
+	
+	@SuppressWarnings("unchecked")
+	public ArrayList<HashMap<String,String>> bigClassList() throws Exception{
+		return (ArrayList<HashMap<String, String>>) getList("baseInfo.bigClassInfo");
+	}
 }

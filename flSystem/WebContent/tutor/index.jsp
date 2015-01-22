@@ -25,23 +25,24 @@
 	</div>
 	<div data-options="region:'center',border:false">
 		<iframe name="mainframe" frameborder="0" height="100%" width="100%"
-			src="../notice_list"></iframe>
+			src="${contextPath}/notice_list"></iframe>
 	</div>
 	<div id="leftFrame" data-options="region:'west',border:true"
 		style="padding: 10px">
 		<ul id="tt" class="easyui-tree">
-			<li><a href="../notice_list">系统公告</a></li>
+			<li><a href="${contextPath}/notice_list">系统公告</a></li>
+			<li><a href="${contextPath}/nt_list.jsp">系统公告test</a></li>
 			<li><span>学业管理</span>
 				<ul>
 					<li><span>选择学生</span>
 						<ul>
 							<li><a href="student_list.jsp">学生列表</a></li>
-							<li><a href="student_confim.jsp">学生信息确认</a></li>
+							<li><a href="student_confim">学生信息确认</a></li>
 						</ul></li>
-					<li><a href="channel_audit.jsp">学生通道选择审核</a></li>
-					<li><a href="major_audit.jsp">学生专业选择审核</a></li>
-					<li><a href="trainingprogram_audit.jsp">学生培养方案审核</a></li>
-					<li><a href="reasearch_audit.jsp">学生科研训练审核</a></li>
+					<li><a href="channel_audit">学生通道选择审核</a></li>
+					<li><a href="major_audit">学生专业选择审核</a></li>
+					<li><a href="trainingprogram_audit">学生培养方案审核</a></li>
+					<li><a href="reasearch_audit">学生科研训练审核</a></li>
 				</ul></li>
 		</ul>
 	</div>

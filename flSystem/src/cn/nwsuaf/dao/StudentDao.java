@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
-
 import cn.nwsuaf.util.DataPacked;
 
 public class StudentDao extends BaseDao {
@@ -38,6 +36,15 @@ public class StudentDao extends BaseDao {
 	 */
 	public Object getStuById(String loginName) throws Exception{
 		return getOne("student.stuByid", loginName);
+	}
+	
+	/**
+	 * 更新个人信息
+	 * @param personInfo
+	 * @throws Exception
+	 */
+	public void personUpdate(Object personInfo) throws Exception{
+		update("student.personUpdate", personInfo);
 	}
 	
 	/**
@@ -87,6 +94,45 @@ public class StudentDao extends BaseDao {
 		errMsg.insert(0, String.format("成功导入%d条，有 %d条未导入\n\n", ok,err));
 		return errMsg.toString();
 	}
+	
+	/**
+	 * 先修课程导入
+	 * @param dataList
+	 * @return
+	 * @throws Exception
+	 */
+	public String importPCourseInfo(ArrayList<String[]> dataList) throws Exception{
+		StringBuffer errMsg = new StringBuffer();
+		ArrayList<HashMap<String, Object>> smapList = DataPacked.pcoursePacked(dataList);
+		int ok = 0;
+		int err = 0;
+		for(HashMap<String,Object> s:smapList){
+			try {
+				insert("student.insertpcourse",s);
+				ok++;
+			} catch (Exception e) {
+				err++;
+				String m = e.getMessage();
+				if(m.contains("Duplicate entry")){
+					m = "课程已经存在...";
+				}
+				errMsg.append(String.format("%d.%s-%s: %s\n",ok+err,s.get("loginName"),s.get("courseID"),m));
+			}
+		}
+		errMsg.insert(0, String.format("成功导入%d条，有 %d条未导入\n\n", ok,err));
+		return errMsg.toString();
+	}
+	
+	/**
+	 * 先修课程列表
+	 * @param stuId 学号
+	 * @return
+	 * @throws Exception
+	 */
+	public Object pcourseList(String stuId) throws Exception{
+		return getList("student.pcourseList", stuId);
+	}
+	
 	/**
 	 * 年级信息列表
 	 * @return
@@ -103,5 +149,25 @@ public class StudentDao extends BaseDao {
 	 */
 	public void delOneStudent(String stuId) throws Exception{
 		delete("student.deleteByLoignname", stuId);
+	}
+	
+	/**
+	 * 自荐书
+	 * @param stuId
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	public HashMap<String, Object> getStuSelfRec(String stuId) throws Exception{
+		return (HashMap<String, Object>) getOne("student.getSelfRec",stuId);
+	}
+	
+	/**
+	 * 更新自荐书
+	 * @param self_Rec
+	 * @throws Exception
+	 */
+	public void updateStuSelfRec(Object self_Rec) throws Exception{
+		update("student.updateSelfRec", self_Rec);
 	}
 }

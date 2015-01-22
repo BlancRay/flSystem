@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -76,7 +76,7 @@
 </head>
 <body>
 	<div class="center800" >
-		<form action="student_save" method="post" ajax="false" class="easyui-form" id="frm">
+		<form action="student_save" ajax="false" class="easyui-form" id="frm">
 			<table class="detailBorder" border="2" width="400">
 				<caption class="firstTitle">添加/编辑学生信息</caption>
 				<tr>

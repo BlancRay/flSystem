@@ -49,7 +49,7 @@
 </script>
 </head>
 <body>
-	<table class="easyui-datagrid" url="${contextPath}/tutor/tutor_index"
+	<table class="easyui-datagrid" url="${contextPath}/tutor/student_list"
 		pagination="true" fit="true" fitColumns="true" selectOnCheck="false"
 		rownumbers="true" singleSelect="true" striped="true"
 		data-options="onLoadSuccess:bindEvent,onCheck:rowCheck,onUncheck:rowCheck,onCheckAll:rowCheck,onUncheckAll:rowCheck"
@@ -58,18 +58,16 @@
 		<thead>
 			<tr>
 				
-				<th field="uname" width="200" halign="center">姓名</th>
-				<th field="loginname" width="200" halign="center">学号</th>
-				<th field="sex" width="200" halign="center">性别</th>
-				<th field="bigClassID" width="200" halign="center">学科大类</th>
-				<th field="self_rec" width="200" halign="center">自荐书</th>
-				<th data-options="field:'tutorID',checkbox:true"></th>
+				<th field="tutorID" width="200" halign="center">导师</th>
+				<th field="studentID" width="200" halign="center">学生</th>
+				<th field="status" width="200" halign="center">状态</th>
+				<th data-options="field:'ttsID',checkbox:true"></th>
 			</tr>
 		</thead>
 	</table>
 	<div id="toolBar" style="padding: 10px">
 		 <a	href="javascript:void(0)" id="batchDelBtn" disabled="true"
-			class="easyui-linkbutton" iconCls="icon-add" onclick="batchDel()">同意招收</a>
+			class="easyui-linkbutton" iconCls="icon-add" onclick="batchDel()">不同意招收</a>
 	</div>
 </body>
 </html>

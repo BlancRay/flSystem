@@ -21,6 +21,7 @@ public class StudentAction extends BaseAction {
 	private String errMsg;
 	private File upload;
 	private HashMap<String, Object> specMap;
+	private HashMap<String, Object> bcMap;
 	private Object gradeList;
 	
 	//筛选用
@@ -45,19 +46,35 @@ public class StudentAction extends BaseAction {
 		}
 		return "list";
 	}
-	public String list1(){
+
+	/**
+	 * 待审核列表
+	 * @return
+	 */
+	public String checklist(){
 		try {
-			stuList = stuDao.getStuList(createWhere(), getPage(), getRows());
+			stuList = stuDao.getStuList("checked=1", getPage(), getRows());
 			specMap = DataPacked.specMap();
 			gradeList = stuDao.getGradeInfo();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Action.ERROR;
 		}
-		return "list1";
-	}	
+		return "checklist";
+	}
+	
+	/**
+	 * 审核
+	 * @return
+	 */
+	public String check(){
+		
+		return Action.SUCCESS;
+	}
+	
 	public String add(){
 		try {
+			bcMap = DataPacked.bigclassMap();
 			specMap = DataPacked.specMap();
 			return "edit";
 		} catch (Exception e) {
@@ -72,6 +89,7 @@ public class StudentAction extends BaseAction {
 		try {
 			stuInfo = (HashMap<String, String>) stuDao.getStuById(loginName);
 			specMap = DataPacked.specMap();
+			bcMap = DataPacked.bigclassMap();
 			gradeList = stuDao.getGradeInfo();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -117,6 +135,29 @@ public class StudentAction extends BaseAction {
 			try {
 				ArrayList<String[]> dataList = xls.readExcel(upload);
 				setErrMsg(stuDao.importStuInfo(dataList));
+			} catch (Exception e) {
+				e.printStackTrace();
+				setErrMsg(e.getMessage());
+				setSuccess(false);
+			}
+		}
+		else{
+			setErrMsg("没有文件上传...");
+			setSuccess(false);
+		}
+		return "upload";
+	}
+	
+	/**
+	 * 已修课程导入
+	 * @return
+	 */
+	public String pcupload(){
+		if(upload != null){
+			ExcelTool xls = new ExcelTool();
+			try {
+				ArrayList<String[]> dataList = xls.readExcel(upload);
+				setErrMsg(stuDao.importPCourseInfo(dataList));
 			} catch (Exception e) {
 				e.printStackTrace();
 				setErrMsg(e.getMessage());
@@ -230,6 +271,14 @@ public class StudentAction extends BaseAction {
 
 	public void setStuId(String stuId) {
 		this.stuId = stuId;
+	}
+
+	public HashMap<String, Object> getBcMap() {
+		return bcMap;
+	}
+
+	public void setBigClassID(HashMap<String, Object> bigClassID) {
+		this.bcMap = bigClassID;
 	}
 
 }

@@ -23,9 +23,11 @@ import javax.servlet.ServletContext;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
+import cn.nwsuaf.action.BaseAction;
+
 import com.opensymphony.xwork2.Action;
 
-public class FileUploadAction {
+public class FileUploadAction extends BaseAction {
 	private File imgFile; // 上传的文件
 	private String imgFileFileName; // 文件名称
 	private String imgFileContentType; // 文件类型
@@ -46,6 +48,7 @@ public class FileUploadAction {
 	 * 文件上传
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public String upload(){
 		ServletContext app = ServletActionContext.getServletContext();
 		String uploadDir = app.getRealPath("/attached/");
@@ -85,11 +88,19 @@ public class FileUploadAction {
 			saveDirFile.mkdirs();
 		}
 		
-		//按日期创建保存目录
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		String ymd = sdf.format(new Date());
-		uploadDir += ymd + "/";	
-		saveUrl  += ymd + "/";
+		//按登录名创建保存目录
+		//SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		//String ymd = sdf.format(new Date());
+		Object usr = getSession().getAttribute("loginUser");
+		if(usr == null){
+			getError("你尚未登录或已经登录超时，请重新登录...");
+			result.put("error", 2);
+			return Action.SUCCESS;
+		}
+		HashMap<String, Object> usrMap = (HashMap<String,Object>)usr;
+		 String loginName = usrMap.get("loginName").toString();
+		uploadDir += loginName + "/";	
+		saveUrl  += loginName + "/";
 		File dirFile = new File(uploadDir);
 		if (!dirFile.exists()) {
 			dirFile.mkdirs();

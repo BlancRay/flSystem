@@ -55,21 +55,18 @@
 				</ul></li>
 			<li><span>系统管理</span>
 				<ul>
-<<<<<<< .mine
 					<li><a href="System/interchoice.jsp">导师学生互选</a></li>
 					<li><a href="System/channel.jsp">通道选择</a></li>
 					<li><a href="System/major.jsp">专业选择</a></li>
 					<li><a href="System/trainingprogram.jsp">培养方案</a></li>
 					<li><a href="System/research.jsp">科研训练</a></li>
 				</ul></li>
-=======
 					<li><a href="control/control_eachSelect">导师学生互选</a></li>
 					<li><a href="control/control_channelSelect">通道/专业选择</a></li>
 					<li>培养方案</li>
 					<li>科研训练</li>
 				</ul>
 			</li>
->>>>>>> .r19
 		</ul>
 	</div>
 	<div id="bottomFrame" data-options="region:'south',border:false">
