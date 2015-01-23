@@ -27,7 +27,6 @@ public class NtDao extends BaseDao {
 		HashMap<String, Object> res = new HashMap<String,Object>();
 		res.put("total", count);
 		res.put("rows", notices);
-		
 		return res;
 	}
 	

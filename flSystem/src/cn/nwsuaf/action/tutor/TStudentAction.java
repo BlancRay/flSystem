@@ -25,7 +25,6 @@ public class TStudentAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String list() throws Exception {
-		System.out.println("tsDao.list");
 		result = (HashMap<String, Object>) tsDao.getTtsByPageAndCount(getPage(), getRows());
 		return Action.SUCCESS;
 	}

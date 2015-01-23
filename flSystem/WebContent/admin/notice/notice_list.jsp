@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%
 	pageContext.setAttribute("contextPath", request.getContextPath());
 %>
@@ -7,18 +7,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="${contextPath}/js/easyui/themes/metro/easyui.css">
-<link rel="stylesheet" type="text/css" href="${contextPath}/js/easyui/themes/icon.css">
-<link rel="stylesheet" type="text/css" href="${contextPath}/css/main.css">
+<link rel="stylesheet" type="text/css"
+	href="${contextPath}/js/easyui/themes/metro/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="${contextPath}/js/easyui/themes/icon.css">
+<link rel="stylesheet" type="text/css"
+	href="${contextPath}/css/main.css">
 <script type="text/javascript" src="${contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${contextPath}/js/admin.js"></script>
-<script type="text/javascript" src="${contextPath}/js/easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="${contextPath}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript"
+	src="${contextPath}/js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript"
+	src="${contextPath}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
 <title>系统公告管理</title>
 <style type="text/css">
-	.titleStyle{
-		font-size: 15px;
-	}
+.titleStyle {
+	font-size: 15px;
+}
 </style>
 <script type="text/javascript">
 	 var opt=function(val,row){
@@ -81,33 +86,28 @@
 </script>
 </head>
 <body>
-	<table class="easyui-datagrid" 
-		url="${contextPath}/admin/notice_list" 
-		pagination="true" 
-		fit="true" 
-		fitColumns="true"
-		selectOnCheck="false"
-		rownumbers="true"
-		singleSelect="true"
-		striped="true"
+	<table class="easyui-datagrid" url="${contextPath}/admin/notice_list"
+		pagination="true" fit="true" fitColumns="true" selectOnCheck="false"
+		rownumbers="true" singleSelect="true" striped="true"
 		data-options="onLoadSuccess:bindEvent,onCheck:rowCheck,onUncheck:rowCheck,onCheckAll:rowCheck,onUncheckAll:rowCheck"
-		toolbar="#toolBar"
-		pageSize="20"
-		title="<span class='titleStyle'>系统公告</span>"
-		id="noticeList"
-		>
+		toolbar="#toolBar" pageSize="20"
+		title="<span class='titleStyle'>系统公告</span>" id="noticeList">
 		<thead>
 			<tr>
 				<th data-options="field:'noticeID',checkbox:true"></th>
 				<th field="title" width="200" halign="center">标题</th>
-				<th field="pdate" width="160" halign="center" align="center" fixed="true">发布时间</th>
-				<th data-options="field:'id',formatter:opt,width:150,halign:'center',fixed:true,align:'center'" >操作</th>
+				<th field="pdate" width="160" halign="center" align="center"
+					fixed="true">发布时间</th>
+				<th
+					data-options="field:'id',formatter:opt,width:150,halign:'center',fixed:true,align:'center'">操作</th>
 			</tr>
 		</thead>
 	</table>
 	<div id="toolBar" style="padding: 10px">
-		<a href="javascript:void(0)"  class="easyui-linkbutton" iconCls="icon-add" onclick="publish()">发布公告</a>
-		<a href="javascript:void(0)" id="batchDelBtn" disabled="true"  class="easyui-linkbutton" iconCls="icon-cancel" onclick="batchDel()">删除公告</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton"
+			iconCls="icon-add" onclick="publish()">发布公告</a> <a
+			href="javascript:void(0)" id="batchDelBtn" disabled="true"
+			class="easyui-linkbutton" iconCls="icon-cancel" onclick="batchDel()">删除公告</a>
 	</div>
 </body>
 </html>

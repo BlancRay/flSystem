@@ -32,15 +32,11 @@ public class TStudentDao extends BaseDao {
 
 	public HashMap<String, Object> getTtsByPageAndCount(int page, int pgSize)
 			throws Exception {
-		System.out.println("tsDao.list.getlist");
 		params = new HashMap<String, Object>();
 		page = page > 0 ? page : 1;
-		System.out.println(page);
 		params.put("offset", (page - 1) * pgSize);
 		params.put("pgSize", pgSize);
-		System.out.println(params.size());
 		List<?> tts = getList("tstudent.getTtsByPage", params);// mapper包.方法名id
-		System.out.println(tts.size());
 		int count = (Integer) getOne("tstudent.getCount");
 		HashMap<String, Object> res = new HashMap<String, Object>();
 		res.put("total", count);

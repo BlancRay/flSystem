@@ -1,6 +1,7 @@
 package cn.nwsuaf.action.notice;
 
 import java.util.HashMap;
+import java.util.List;
 
 import com.opensymphony.xwork2.Action;
 

@@ -28,12 +28,6 @@
     
     <!-- 按noticeID查询 -->
     <select id="getNoticeByID" parameterType="int" resultType="map">
-    	select 
-    		noticeID,
-    		title,
-    		content,
-    		DATE_FORMAT(pdate,'%Y-%m-%d %T') pdate,
-    		skipNum
-    	from fl_notice where noticeID = #{id}
+    	select content from fl_notice where noticeID = #{id}
     </select>
 </mapper>
