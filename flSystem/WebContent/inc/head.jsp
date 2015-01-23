@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+    <%
+	pageContext.setAttribute("contextPath", request.getContextPath());
+%>
     <script type="text/javascript">
     function realSysTime(dateBox){ 
     	var now=new Date(); //创建Date对象 
@@ -21,8 +23,8 @@
     	} 
 	</script>
 <div id="logoBox">
-	<img alt="logo" src="../images/logo.png"><p>
-	<img alt="logonEn" src="../images/logoEn.png">
+	<img alt="logo" src="${contextPath}/images/logo.png"><p>
+	<img alt="logonEn" src="${contextPath}/images/logoEn.png">
 </div>
 <div id="headInfoBox">
 	<div>欢迎您, xxx！！【<a href="javascript:">退出</a>】</div>
@@ -30,7 +32,7 @@
 	
 	</div>
 	<div>
-		<a href="../notice_list" class="easyui-linkbutton topBtn" plain="true">系统公告</a>
+		<a href="${contextPath}/nt_list.jsp" class="easyui-linkbutton topBtn" plain="true">系统公告</a>
 		<a href="javascript:" class="easyui-linkbutton topBtn" plain="true">站内短信</a>
 		<a href="javascript:" class="easyui-linkbutton topBtn" plain="true">口令修改</a>
 		<a href="personInfo.html" class="easyui-linkbutton topBtn" plain="true">个人信息</a>
