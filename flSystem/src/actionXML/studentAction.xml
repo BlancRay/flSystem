@@ -16,7 +16,7 @@
 			</result>
 		</action>
 		<!-- 系统公告 -->
-		<action name="notice_*" class="cn.nwsuaf.action.admin.NoticeAdminAction" method="{1}">
+		<action name="nt_*" class="cn.nwsuaf.action.notice.NtAction" method="{1}">
 			<result type="json">
 				<param name="root">result</param>
 			</result>
@@ -24,6 +24,12 @@
 		<!-- 用户信息 -->
 		<action name="user_*" class="cn.nwsuaf.action.admin.UserAction" method="{1}">
 			<result name="exist" type="json" />		    
+		</action>
+		<!-- 导师列表 -->
+		<action name="tutor_*" class="cn.nwsuaf.action.student.STutorAction" method="{1}">
+		<result type="json">
+				<param name="root">result</param>
+			</result>		
 		</action>
     </package>
 </struts>

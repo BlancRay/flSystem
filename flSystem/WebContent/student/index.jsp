@@ -30,17 +30,17 @@
 	</div>
 	<div data-options="region:'center',border:false">
 		<iframe name="mainframe" frameborder="0" height="100%" width="100%"
-			src="../notice_list"></iframe>
+			src="../nt_list.jsp"></iframe>
 	</div>
 	<div id="leftFrame" data-options="region:'west',border:true"
 		style="padding: 10px">
 		<ul id="tt" class="easyui-tree">
-			<li><a href="../notice_list">系统公告</a></li>
+			<li><a href="../nt_list.jsp">系统公告</a></li>
 			<li><span>学业管理</span>
 				<ul>
 					<li><span>导师选择</span>
 						<ul>
-							<li><a href="tutor_search.jsp">导师查询</a></li>
+							<li><a href="tutor_list.jsp">导师查询</a></li>
 							<li><a href="tutor_choice.jsp">选择导师</a></li>
 						</ul></li>
 					<li><a href="channel.jsp">通道选择</a></li>

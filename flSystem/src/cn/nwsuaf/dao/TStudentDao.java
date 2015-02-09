@@ -16,7 +16,7 @@ public class TStudentDao extends BaseDao {
 	 * @return
 	 * @throws Exception
 	 */
-	public HashMap<String, Object> getStuList(String where, int pg, int pgSize)
+/*	public HashMap<String, Object> getStuList(String where, int pg, int pgSize)
 			throws Exception {
 		HashMap<String, Object> param = new HashMap<String, Object>();
 		param.put("where", where);
@@ -28,7 +28,7 @@ public class TStudentDao extends BaseDao {
 		param.put("rows", res);
 		param.put("total", num);
 		return param;
-	}
+	}*/
 
 	public HashMap<String, Object> getTtsByPageAndCount(int page, int pgSize)
 			throws Exception {

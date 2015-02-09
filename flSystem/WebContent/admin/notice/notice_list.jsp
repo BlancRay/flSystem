@@ -26,62 +26,59 @@
 }
 </style>
 <script type="text/javascript">
-	 var opt=function(val,row){
-		 	r = "<a href='#' recID='" + val + "' class='skimBtn'>预览</a> |"
-		 	r += "<a href='#' recID='" + val + "' class='editBtn'>编辑</a> |";
-		 	r += " <a href='#' recID='" + val + "' class='delBtn'>删除</a>"
-			return r;			
-		};
-	var	bindEvent=function(){
-			$(".skimBtn").click(function(){
-				window.open("${contextPath}/notice_detail?noticeID="+$(this).attr("recID"),"_blank");
-			});
-			$(".editBtn").click(function(){
-				id = $(this).attr("recID");
-				window.open("notice_edit.jsp?noticeID="+id,"mainframe");
-			});
-			$(".delBtn").click(function(){
-				var id = $(this).attr("recID");
-				del(id);
-			});
-		};
+	var opt = function(val, row) {
+		r = "<a href='#' recID='" + val + "' class='skimBtn'>预览</a> |"
+		r += "<a href='#' recID='" + val + "' class='editBtn'>编辑</a> |";
+		r += " <a href='#' recID='" + val + "' class='delBtn'>删除</a>"
+		return r;
+	};
+	var bindEvent = function() {
+		$(".skimBtn").click(
+				function() {
+					window.open("${contextPath}/notice_detail?noticeID="
+							+ $(this).attr("recID"), "_blank");
+				});
+		$(".editBtn").click(function() {
+			id = $(this).attr("recID");
+			window.open("notice_edit.jsp?noticeID=" + id, "mainframe");
+		});
+		$(".delBtn").click(function() {
+			var id = $(this).attr("recID");
+			del(id);
+		});
+	};
 	//发布公告
-	function publish(){
-		window.open("notice_edit.jsp?noticeID=0","mainframe");
+	function publish() {
+		window.open("notice_edit.jsp?noticeID=0", "mainframe");
 	}
 	//批量删除
-	function batchDel(){
+	function batchDel() {
 		var rows = $("#noticeList").datagrid("getChecked");
 		var ids = new Array();
-		$.each(rows,function(){
+		$.each(rows, function() {
 			ids.push(this.noticeID);
 		});
 		var id = ids.join(",");
 		del(id);
 	}
-	function del(id){
-		$.messager.confirm("信息确认","您确认要删除选中的公告吗？",
-			function(r){
-				if(r){
-					$.post(
-							"${contextPath}/admin/notice_delete",
-							{ids:id},
-							function(data){
-								if(data.success){
-									$.messager.alert('Info', '删除成功', 'info');
-									$("#noticeList").datagrid('reload');
-								}
-							},
-							'json'
-						);
-				}
+	function del(id) {
+		$.messager.confirm("信息确认", "您确认要删除选中的公告吗？", function(r) {
+			if (r) {
+				$.post("${contextPath}/admin/notice_delete", {
+					ids : id
+				}, function(data) {
+					if (data.success) {
+						$.messager.alert('Info', '删除成功', 'info');
+						$("#noticeList").datagrid('reload');
+					}
+				}, 'json');
 			}
-		);
+		});
 	}
 
-	var rowCheck=function(row,idx){
+	var rowCheck = function(row, idx) {
 		var rows = $("#noticeList").datagrid("getChecked");
-		$("#batchDelBtn").linkbutton(rows.length>0?"enable":"disable");
+		$("#batchDelBtn").linkbutton(rows.length > 0 ? "enable" : "disable");
 	}
 </script>
 </head>

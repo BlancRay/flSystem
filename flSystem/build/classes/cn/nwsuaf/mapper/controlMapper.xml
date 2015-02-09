@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="control">
+    <!-- 可分流的年级 -->
+    <select id="divertedGrade" resultType="map">
+        SELECT stu.`grade` FROM `fl_student`  stu WHERE grade NOT IN (SELECT annual FROM `control`) GROUP BY grade
+    </select>
+    <!-- 是否存在未完成的选择 -->
+    <select id="selectIsExist" resultType="string">
+        SELECT annual FROM selectannual
+    </select>
+    
+    <insert id="insertSelect" parameterType="string">
+        insert selectannual 
+        set
+        	annual = #{annual}
+    </insert>
+    
+    <delete id="deleteSelect">
+        delete from selectannual
+    </delete>
+    
+    <!-- 互选状态 -->
+    <select id="eachSelect" parameterType="string" resultType="map">
+        select eachselect,startTime, TIMESTAMPDIFF(SECOND ,`startTime`,SYSDATE()) passSecond from control where annual = #{annual}
+    </select>
+    
+    <insert id="insertEachSelect" parameterType="string">
+        insert control
+        set
+        	eachselect = 1,
+        	annual = #{annual},
+        	startTime = SYSDATE()
+    </insert>
+    
+    <update id="endEachSelect">
+        update control
+        set
+        	eachselect = 2
+        where
+        	annual = #{annual}
+    </update>
+    
+    
+    
+    <!-- 通道选择状态 -->
+    <select id="channelSelect" parameterType="string" resultType="map">
+        select *, TIMESTAMPDIFF(SECOND ,`startTime`,SYSDATE()) passSecond  from control where annual = #{annual}
+    </select>
+    
+    <update id="startChannelSelect" parameterType="String">
+        update control
+        set
+        	channelselect = 1,
+        	startTime = SYSDATE()
+        where
+        	annual = #{annual}
+    </update>
+    <update id="endChannelSelect" parameterType="String">
+        update control
+        set
+        	channelselect = 2
+        where
+        	annual = #{annual}
+    </update>
+    
+    <!-- 普通用户用 分流状态查询 -->
+    <select id="getStatus">
+        SELECT `eachselect`,`channelselect`,c.`annual` FROM `control` c WHERE c.`annual` IN (SELECT annual FROM `selectannual`)
+    </select>
+    
+    <!-- 统计 -->
+    <!-- 所有参选人数 -->
+    <select id="allSelect" resultType="int" parameterType="string">
+        select count(loginName) from fl_student where grade = #{grade}
+    </select>
+    <!-- 选择统计 -->
+    <select id="selectedList" resultType="int" parameterType="map">
+        SELECT stu.`loginName`,stu.`uName`,stu.`className`,tu.uname tname ,ttt.`status` FROM `fl_tutortostudent` ttt 
+		LEFT JOIN `fl_student` stu ON stu.`loginName` = ttt.studentID
+		LEFT JOIN `fl_tutor` tu ON tu.loginName = ttt.tutorID
+    </select>
+    
+    <select id="notSelectList" parameterType="string" resultType="map">
+        SELECT stu.`loginName`,stu.`uName`,stu.`className` FROM `fl_student` stu WHERE stu.`loginName` NOT IN(SELECT studentID FROM `fl_tutortostudent`) AND grade = #{grade}
+    </select>
+    
+    <!-- 通道专业选择信息 -->
+    <select id="channelSelectInfo"  parameterType="string" resultType="map">
+		SELECT stu.`loginName`,stu.`uName`,stu.`className`,stu.`channel` chl,stu.`specselected`, sp.`specialtyName` spcName  FROM `fl_student` stu 
+		LEFT JOIN `fl_specialty` sp ON sp.`specialtyID` = stu.`specialtyID` 
+		where stu.grade = #{grade}      
+    </select>
+    
+    <!-- 管理员审核专业选择 -->
+    <update id="adminCheckSpec" parameterType="string">
+        update fl_student 
+        set
+        	specselected = 2
+        where
+        	loginName = #{login}
+    </update>
+</mapper>

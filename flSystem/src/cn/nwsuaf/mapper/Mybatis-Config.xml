@@ -31,5 +31,6 @@
 		<mapper resource="cn/nwsuaf/mapper/controlMapper.xml" />
 		<mapper resource="cn/nwsuaf/mapper/tstudentMapper.xml" />
 		<mapper resource="cn/nwsuaf/mapper/ntMapper.xml" />
+		<mapper resource="cn/nwsuaf/mapper/tutorlistMapper.xml" />
 	</mappers>
 </configuration>
