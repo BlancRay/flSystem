@@ -1,0 +1,30 @@
+只保留错误内容
+
+管理员添加学生时报错：
+Error updating database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '
+			sixGrade = '444.0',
+			uName = 'aaa',
+			creditscore = '444.0',
+			disciplin' at line 6
+### The error may involve student.stuInsert-Inline
+### The error occurred while setting parameters
+### SQL: insert fl_student      set       loginName = ?,       grade = ?,    className = ?,    bigClassID = ,    sixGrade = ?,    uName = ?,    creditscore = ?,    discipline = ?,          specialtyID = 4,         sex = ?
+可能是中文问题
+
+
+管理员添加专业信息时，添加成功，但无法返回major_list页面，报错如下：
+HTTP Status 404 - There is no Action mapped for namespace [/] and action name [major_list] associated with context path [/flSystem].
+
+
+管理员编辑专业信息时，无法修改，原因是save 方法的majorinfo中的oldspecialtyID是String类型，数据库中是int类型
+### Error updating database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where specialtyID = '4'' at line 7
+### The error may involve major.majorUpdate-Inline
+### The error occurred while setting parameters
+### SQL: update fl_specilty      set       specialtyID = ?,       bigClassID = ?,    specialtyName = ?,    descript = 5,   where specialtyID = ?
+
+管理员专业信息删除功能无法实现，原因可能是ID类型错误，界面上是String，Action中是int类型
+
+
+
+
+

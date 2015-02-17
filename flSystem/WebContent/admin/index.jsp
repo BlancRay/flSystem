@@ -38,9 +38,9 @@
 			<li><a href="notice/notice_list.jsp">系统公告</a></li>
 			<li><span>基本信息管理</span>
 				<ul>
-					<li><a href="BaseInfo/course.jsp">课程信息</a></li>
-					<li><a href="BaseInfo/major.jsp">专业信息</a></li>
-					<li><a href="BaseInfo/subject.jsp">学科大类信息</a></li>
+					<li><a href="BaseInfo/course/course_list.jsp">课程信息</a></li>
+					<li><a href="BaseInfo/major/major_list">专业信息</a></li>
+					<li><a href="BaseInfo/subject/subject_list.jsp">学科大类信息</a></li>
 					<li><a href="BaseInfo/upload.jsp">基本信息导入</a></li>
 				</ul></li>
 			<li><span>导师信息管理</span>
@@ -55,16 +55,10 @@
 				</ul></li>
 			<li><span>系统管理</span>
 				<ul>
-					<li><a href="System/interchoice.jsp">导师学生互选</a></li>
-					<li><a href="System/channel.jsp">通道选择</a></li>
-					<li><a href="System/major.jsp">专业选择</a></li>
-					<li><a href="System/trainingprogram.jsp">培养方案</a></li>
-					<li><a href="System/research.jsp">科研训练</a></li>
-				</ul></li>
 					<li><a href="control/control_eachSelect">导师学生互选</a></li>
 					<li><a href="control/control_channelSelect">通道/专业选择</a></li>
-					<li>培养方案</li>
-					<li>科研训练</li>
+					<li><a href="control/trainingprogram.jsp">培养方案</a></li>
+					<li><a href="control/research.jsp">科研训练</a></li>
 				</ul>
 			</li>
 		</ul>

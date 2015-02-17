@@ -34,7 +34,25 @@
 				/admin/student/student_edit.jsp
 			</result>
 			<result name="save" type="redirect">
-				/admin/student_list
+				/admin/student/student_list
+			</result>
+			<result name="delete"  type="json"></result>
+			<result name="upload" type="json"></result>
+		</action>
+		
+		<!-- 专业信息管理 -->
+		<action name="major_*" class="cn.nwsuaf.action.admin.MajorAction" method="{1}">
+			<result name="list">
+				/admin/BaseInfo/major/major_list.jsp
+			</result>			
+			<result name="checklist">
+				/admin/BaseInfo/major/major_check.jsp
+			</result>
+			<result name="edit">
+				/admin/BaseInfo/major/major_edit.jsp
+			</result>
+			<result name="save" type="redirect">
+				/admin/BaseInfo/major/major_list
 			</result>
 			<result name="delete"  type="json"></result>
 			<result name="upload" type="json"></result>

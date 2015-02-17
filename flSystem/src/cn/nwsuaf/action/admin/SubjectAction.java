@@ -1,0 +1,284 @@
+package cn.nwsuaf.action.admin;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import com.opensymphony.xwork2.Action;
+
+import cn.nwsuaf.action.BaseAction;
+import cn.nwsuaf.dao.StudentDao;
+import cn.nwsuaf.dao.UserDao;
+import cn.nwsuaf.util.DataPacked;
+import cn.nwsuaf.util.ExcelTool;
+
+public class SubjectAction extends BaseAction {
+	private StudentDao stuDao;
+	private HashMap<String, Object> stuList;
+	private HashMap<String,String> stuInfo;
+	private String loginName;
+	private boolean success = true;
+	private String errMsg;
+	private File upload;
+	private HashMap<String, Object> specMap;
+	private HashMap<String, Object> bcMap;
+	private Object gradeList;
+	
+	//筛选用
+	private int specId;
+	private String grade;
+	private String className;
+	private String stuId;
+	
+	
+	public SubjectAction(){
+		stuDao = new StudentDao();
+	}
+	
+	public String list(){
+		try {
+			stuList = stuDao.getStuList(createWhere(), getPage(), getRows());
+			specMap = DataPacked.specMap();
+			gradeList = stuDao.getGradeInfo();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "list";
+	}
+
+	/**
+	 * 待审核列表
+	 * @return
+	 */
+	public String checklist(){
+		try {
+			stuList = stuDao.getStuList("checked=1", getPage(), getRows());
+			specMap = DataPacked.specMap();
+			gradeList = stuDao.getGradeInfo();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "checklist";
+	}
+	
+	/**
+	 * 审核
+	 * @return
+	 */
+	public String check(){
+		
+		return Action.SUCCESS;
+	}
+	
+	public String add(){
+		try {
+			bcMap = DataPacked.bigclassMap();
+			specMap = DataPacked.specMap();
+			return "edit";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public String edit(){
+		try {
+			stuInfo = (HashMap<String, String>) stuDao.getStuById(loginName);
+			specMap = DataPacked.specMap();
+			bcMap = DataPacked.bigclassMap();
+			gradeList = stuDao.getGradeInfo();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "edit";
+	}
+	
+	public String save(){
+		try {
+			stuDao.save(stuInfo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "save";
+	}
+	
+	public String delete(){
+		try {
+			stuDao.delOneStudent(stuId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			success = false;
+		}
+		return "delete";
+	}
+	
+	public String resetPasswd(){
+		try {
+			UserDao uDao = new UserDao();
+			uDao.resetPasswd(stuId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			success = false;
+		}
+		return "delete";
+	}
+
+	public String upload(){
+		if(upload != null){
+			ExcelTool xls = new ExcelTool();
+			try {
+				ArrayList<String[]> dataList = xls.readExcel(upload);
+				setErrMsg(stuDao.importStuInfo(dataList));
+			} catch (Exception e) {
+				e.printStackTrace();
+				setErrMsg(e.getMessage());
+				setSuccess(false);
+			}
+		}
+		else{
+			setErrMsg("没有文件上传...");
+			setSuccess(false);
+		}
+		return "upload";
+	}
+	
+	/**
+	 * 已修课程导入
+	 * @return
+	 */
+	public String pcupload(){
+		if(upload != null){
+			ExcelTool xls = new ExcelTool();
+			try {
+				ArrayList<String[]> dataList = xls.readExcel(upload);
+				setErrMsg(stuDao.importPCourseInfo(dataList));
+			} catch (Exception e) {
+				e.printStackTrace();
+				setErrMsg(e.getMessage());
+				setSuccess(false);
+			}
+		}
+		else{
+			setErrMsg("没有文件上传...");
+			setSuccess(false);
+		}
+		return "upload";
+	}
+	
+	/**
+	 * 创建查询条件
+	 * @return
+	 */
+	private String createWhere(){
+		String where = "1=1 ";
+		if(specId != 0){
+			where += "and stu.specialtyID=" + specId;
+		}
+		if(grade != null && !"".equals(grade)){
+			where += String.format(" and grade='%s'", grade);
+		}
+		if(className != null && !"".equals(className)){
+			where += String.format(" and className='%s'", className);
+		}
+		
+		if(stuId != null && !"".equals(stuId)){
+			where += String.format(" and loginName='%s'", stuId);
+		}
+		return where;
+	}
+	
+	public HashMap<String, Object> getStuList() {
+		return stuList;
+	}
+
+	public HashMap<String,String> getStuInfo() {
+		return stuInfo;
+	}
+
+	public void setStuInfo(HashMap<String,String> stuInfo) {
+		this.stuInfo = stuInfo;
+	}
+
+	public String getLoginName() {
+		return loginName;
+	}
+
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+
+	public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+
+	public String getErrMsg() {
+		return errMsg;
+	}
+
+	public void setErrMsg(String errMsg) {
+		this.errMsg = errMsg;
+	}
+
+	public HashMap<String, Object> getSpecMap() {
+		return specMap;
+	}
+
+	public Object getGradeList() {
+		return gradeList;
+	}
+	
+	public void setUpload(File upload) {
+		this.upload = upload;
+	}
+
+	public int getSpecId() {
+		return specId;
+	}
+
+	public void setSpecId(int specId) {
+		this.specId = specId;
+	}
+
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
+	public String getStuId() {
+		return stuId;
+	}
+
+	public void setStuId(String stuId) {
+		this.stuId = stuId;
+	}
+
+	public HashMap<String, Object> getBcMap() {
+		return bcMap;
+	}
+
+	public void setBigClassID(HashMap<String, Object> bigClassID) {
+		this.bcMap = bigClassID;
+	}
+
+}
