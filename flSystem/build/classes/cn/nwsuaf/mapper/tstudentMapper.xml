@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tstudent">
-	<!-- 列表 -->
-	<select id="getTtsByPage" parameterType="map" resultType="map">
-		SELECT * FROM fl_tutortostudent
-		LIMIT #{offset},#{pgSize}
+	<!-- 已招收学生列表 -->
+	<select id="getAllStu" parameterType="String" resultType="map">
+		SELECT stu.loginName,stu.uName,stu.specselected,tr.teachCheck,re.audit,stu.channel
+		FROM fl_student stu
+		LEFT JOIN fl_trainplan tr ON tr.studentID = stu.loginName
+		LEFT JOIN fl_researchtrain re ON re.tranPlanID = tr.tranPlanID
+		where tutorID = 2008001001
 	</select>
 
 	<!-- 记录条数 -->
 	<select id="getCount" resultType="int">
-		select count(ttsID) from
-		fl_tutortostudent
+		select count(ttsID) from fl_tutortostudent
+	</select>
+	
+	<select id="getSelectedCount" parameterType="String" resultType="int">
+		select count(loginName) from fl_student
+		where tutorID = 2008001001
+	</select>
+	
+	<select id="stuNum" resultType="int">
+		select count(studentID) from fl_tutortostudent
+		where tutorID = 2008001001
 	</select>
 
 	<!-- 按登录名删除 -->
@@ -19,4 +31,11 @@
 		fl_tutortostudent where tutorID=#{loginname} and
 		studentID=#{studentid}
 	</delete>
+	
+	<!-- 互选中未确认列表 -->
+	<select id="stulist" parameterType="string" resultType="map">
+		SELECT * FROM fl_student stu
+		LEFT JOIN fl_tutortostudent tts ON tts.studentID = stu.loginName
+		where tts.tutorID = 2008001001
+	</select>
 </mapper>

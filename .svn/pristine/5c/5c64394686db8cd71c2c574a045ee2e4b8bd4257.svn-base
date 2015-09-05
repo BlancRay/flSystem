@@ -1,0 +1,60 @@
+@CHARSET "UTF-8";
+#noticeFrame{
+	margin: 0px auto;
+	width: 650px!important;
+	height: 430px;
+	position: relative;
+	background-color: #FCFEFC;
+	padding: 10px;
+}
+
+#pgNav{
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	width: 550px;
+}
+.notice dl{
+	line-height: 20px;
+	padding-left: 20px;
+	padding-right: 10px;
+	
+}
+.notice dt{
+	float: right;
+	width: 120px;
+}
+
+.title{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#noticeDetail{
+	margin: 0px auto;
+	width: 900px;
+	height: 96%;
+	background-color: #FCFEdC;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#noticeDetail dt{
+	padding: 10px;
+	text-align: center;
+	line-height: 2;
+}
+
+#noticeDetail dd{
+	text-indent: 2em;
+	line-height: 2;
+}
+
+.CloseButton{
+	margin: 0px auto;
+	width: 920px;
+	text-align: center;
+	line-height: 30px;
+	background-color: #FCFEdC;
+}
+

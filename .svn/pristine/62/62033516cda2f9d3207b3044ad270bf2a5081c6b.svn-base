@@ -1,0 +1,215 @@
+package cn.nwsuaf.action.admin;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import com.opensymphony.xwork2.Action;
+import cn.nwsuaf.action.BaseAction;
+import cn.nwsuaf.dao.TutorDao;
+import cn.nwsuaf.dao.UserDao;
+import cn.nwsuaf.util.ExcelTool;
+
+public class TutorAction extends BaseAction {
+	private TutorDao tutorDao;
+	private HashMap<String, Object> tutorList;
+	private HashMap<String,String> tutorInfo;
+	private String loginName;
+	private boolean success = true;
+	private String errMsg;
+	private File upload;
+	
+	//筛选用
+	private String Name;
+	private String tutorId;
+	
+	
+	public TutorAction(){
+		tutorDao = new TutorDao();
+	}
+	
+	public String list(){
+		try {
+			tutorList = tutorDao.getTutorList(createWhere(), getPage(), getRows());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "list";
+	}
+
+	/**
+	 * 待审核列表
+	 * @return
+	 */
+	public String checklist(){
+		try {
+			tutorList = tutorDao.getTutorList("checked=1", getPage(), getRows());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "checklist";
+	}
+	
+	/**
+	 * 审核
+	 * @return
+	 */
+	public String check(){
+		
+		return Action.SUCCESS;
+	}
+	
+	public String add(){
+		try {
+			return "edit";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public String edit(){
+		try {
+			tutorInfo = (HashMap<String, String>) tutorDao.getTutorById(loginName);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "edit";
+	}
+	
+	public String save(){
+		try {
+			tutorDao.save(tutorInfo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "save";
+	}
+	
+	public String delete(){
+		try {
+			tutorDao.delOneTutor(tutorId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			success = false;
+		}
+		return "delete";
+	}
+	
+	public String resetPasswd(){
+		try {
+			UserDao uDao = new UserDao();
+			uDao.resetPasswd(tutorId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			success = false;
+		}
+		return "delete";
+	}
+
+	public String upload(){
+		if(upload != null){
+			ExcelTool xls = new ExcelTool();
+			try {
+				ArrayList<String[]> dataList = xls.readExcel(upload);
+				setErrMsg(tutorDao.importTutorInfo(dataList));
+			} catch (Exception e) {
+				e.printStackTrace();
+				setErrMsg(e.getMessage());
+				setSuccess(false);
+			}
+		}
+		else{
+			setErrMsg("没有文件上传...");
+			setSuccess(false);
+		}
+		return "upload";
+	}
+	
+	
+	/**
+	 * 创建查询条件
+	 * @return
+	 */
+	private String createWhere(){
+		String where = "1=1 ";
+		if(Name != null && !"".equals(Name)){
+			where += String.format(" and uName='%s'", Name);
+		}
+		
+		if(tutorId != null && !"".equals(tutorId)){
+			where += String.format(" and loginName='%s'", tutorId);
+		}
+		return where;
+	}
+
+	public HashMap<String, Object> getTutorList() {
+		return tutorList;
+	}
+
+	public void setTutorList(HashMap<String, Object> tutorList) {
+		this.tutorList = tutorList;
+	}
+
+	public HashMap<String, String> getTutorInfo() {
+		return tutorInfo;
+	}
+
+	public void setTutorInfo(HashMap<String, String> tutorInfo) {
+		this.tutorInfo = tutorInfo;
+	}
+
+	public String getLoginName() {
+		return loginName;
+	}
+
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+
+	public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+
+	public String getErrMsg() {
+		return errMsg;
+	}
+
+	public void setErrMsg(String errMsg) {
+		this.errMsg = errMsg;
+	}
+
+	public File getUpload() {
+		return upload;
+	}
+
+	public void setUpload(File upload) {
+		this.upload = upload;
+	}
+
+	public String getName() {
+		return Name;
+	}
+
+	public void setName(String name) {
+		Name = name;
+	}
+
+	public String getTutorId() {
+		return tutorId;
+	}
+
+	public void setTutorId(String tutorId) {
+		this.tutorId = tutorId;
+	}
+	
+}

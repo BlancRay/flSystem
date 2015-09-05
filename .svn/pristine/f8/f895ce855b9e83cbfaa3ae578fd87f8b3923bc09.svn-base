@@ -1,0 +1,176 @@
+@CHARSET "UTF-8";
+*{
+	font-size: 9pt;
+	padding: 0px;
+	margin: 0px;
+	background-repeat: no-repeat;
+	line-height: 1.5;
+}
+#topFrame{
+	height: 80px;
+	background-image: url('../images/titlebg.png');
+	background-repeat: repeat-x;
+}
+
+#rightFrame{
+	width: 400px;
+	background-color: #CCFFFF;
+}
+
+#leftFrame{
+	width: 180px;
+	background-color: #CCFFFF;
+}
+
+#bottomFrame{
+	height: 30px;
+	background-image: url('../images/bottomBg.png');
+	background-repeat: repeat-x;
+	line-height: 30px;
+	text-align: center;
+	color: #666;
+}
+a{
+	text-decoration: none;
+	color: black;
+}
+a:HOVER {
+	color: red;
+}
+
+#logoBox{
+	float: left;
+	text-align: center;
+	width: 360px;
+	padding-top: 15px;
+}
+
+#headInfoBox{
+	text-align: right;
+	padding-right: 10px;
+	padding-top: 10px;
+	color: #fff;
+	font-weight: bold;
+	line-height: 20px;
+}
+
+#headInfoBox a{
+	color: #fff;
+}
+
+#headInfoBox a:hover{
+	color: #f00;
+}
+
+.tableBorder{
+	border-top: blue double 5px;
+	border-bottom: blue solid 2px;
+}
+
+.trBg{
+	background-color: #ff9;
+}
+
+.center800{
+	margin: 10px auto;
+	width:800px;
+}
+
+.center1000{
+	margin: 10px auto;
+	width:1000px;
+}
+
+.listBorder{
+	border-top: 5px double #000;
+	border-bottom: 2px solid #000;
+}
+
+.listBorder th{
+	border-bottom: 1px solid #000;
+	padding: 5px;
+	text-align: center!important;
+}
+.listBorder td{
+	border-bottom: 1pt dashed #ccc;
+	text-align: center;
+	padding: 5px;
+}
+.detailBorder{
+	border-collapse: collapse;
+	margin: 5px auto;
+}
+.toolbar{
+	text-align: center;
+	padding: 5px;
+}
+
+.footbar{
+	margin-top:10px;
+	text-align:right;
+	padding: 5px;
+	border:1px solid #ddd;
+}
+
+.firstTitle{
+	font-size: 24px;
+	font-weight: bold;
+	text-align: center;
+	margin: 10px;
+}
+
+.menuButton{
+	font-family:'微软雅黑 Bold', '微软雅黑';
+	font-weight:700;
+	font-style:normal;
+	font-size:18px;
+	color:#FFFFFF;
+	cursor: pointer;
+	width: 130px;
+	height: 40px;
+	background-image: url("../images/btnBg.png");
+	margin-top: 20px;
+	padding-top: 7px;
+	margin-left: 20px;
+}
+
+.tabHead{
+	font-size: 16px;
+	font-weight: bolder;
+	line-height: 40px;
+}
+
+.tab div,.tab form{
+	width: 800px;
+	margin: 20px auto;
+}
+
+table.detail{
+	border-collapse: collapse;
+}
+
+table.detail th{
+	text-align: right;
+	line-height: 2;
+	padding: 5px;
+}
+table.detail td{
+	padding: 5px;
+}
+
+caption{
+	font-size: 18px;
+	font-weight: bold;
+	margin: 10px;
+	font-family: "微软雅黑";
+}
+
+.paper{
+			height: 800px;
+			border-top: 1px solid #bbb;
+			border-left: 1px solid #bbb;
+			border-bottom: 5px solid #eee;
+			border-right: 5px solid #eee;
+			padding: 10px;
+			background-color:#ffe;
+		}

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="course">
+	<!-- 列表 -->
+    <select id="courselist" parameterType="map" resultType="map">
+    	SELECT 
+		   * FROM fl_courses
+		<if test="where != null">
+			where ${where}
+		</if>
+		LIMIT #{offset},#{pgSize}
+    </select>
+    <!-- 记录条数 -->
+    <select id="courseNum" parameterType="map" resultType="int">
+    	SELECT count(courseID) FROM fl_courses
+    	<if test="where != null">
+			where ${where}
+		</if>
+    </select>
+    
+    <!-- 编辑 -->
+    <select id="courseByid" parameterType="String" resultType="map">
+    	SELECT 
+		   * FROM fl_courses
+		where courseID = #{courseID}
+    </select>
+    
+    <!-- 添加 -->
+    <insert id="courseInsert" parameterType="map">
+    	insert fl_courses
+    	set
+    		courseID = #{courseID},
+    		courseName = #{courseName},
+			credit = #{credit},
+			courseType = #{courseType},
+			courseHours = #{courseHours}
+    </insert>
+    
+    <!-- 更新 -->
+    <update id="courseUpdate" parameterType="map">
+    	update fl_courses
+    	set
+    		courseID = #{courseID},
+    		courseName = #{courseName},
+			credit = #{credit},
+			courseType = #{courseType},
+			courseHours = #{courseHours}
+		where courseID = #{oldcourseID}
+    </update>
+    
+    <!-- 按条件删除 -->
+    <delete id="deleteByWhere" parameterType="String">
+    	
+    </delete>
+    
+    <!-- 按课程编号删除 -->
+    <delete id="deleteBycourseID"  parameterType="String">
+    	delete from fl_courses where courseID=#{courseID}
+    </delete>
+
+<select id="courseIDIsExist" parameterType="String" resultType="int">
+        select count(courseID) from fl_courses where courseID = #{courseID}
+    </select>
+</mapper>

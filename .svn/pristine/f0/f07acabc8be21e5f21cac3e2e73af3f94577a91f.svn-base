@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tutor">
+	<!-- 导师列表 -->
+	<select id="tutorlist" parameterType="map" resultType="map">
+    	select tutor.*,sp.specialtyName from fl_tutor tutor
+		LEFT JOIN fl_specialty sp ON sp.specialtyID = tutor.specialtyID
+		<if test="where != null">
+			where ${where}
+		</if>
+		LIMIT #{offset},#{pgSize}
+    </select>
+    <!-- 记录条数 -->
+    <select id="tutorNum" parameterType="map" resultType="int">
+    	select count(loginName) from fl_tutor
+    	<if test="where != null">
+			where ${where}
+		</if>
+    </select>
+    
+    <!-- one -->
+    <select id="tutorByid" parameterType="String" resultType="map">
+    	SELECT 
+		   tutor.*,sp.specialtyName
+		from fl_tutor tutor
+		LEFT JOIN fl_specialty sp ON sp.specialtyID = tutor.specialtyID
+		where tutor.loginName = #{loginName}
+    </select>
+    
+    <!-- 添加 -->
+    <insert id="tutorInsert" parameterType="map">
+    	insert fl_tutor
+    	set
+    		loginName = #{loginName},
+			uName = #{uName},
+			quota = #{quota},
+			email = #{email},
+			college = #{college},
+			type = #{type},
+			phone = #{phone},
+			sex = #{sex}			
+    </insert>
+    
+    <!-- 更新 -->
+    <update id="tutorUpdate" parameterType="map">
+    	update fl_tutor
+    	set
+    		loginName = #{loginName},
+			uName = #{uName},
+			quota = #{quota},
+			email = #{email},
+			college = #{college},
+			type = #{type},
+			phone = #{phone},
+			sex = #{sex}
+		where loginName = #{oldLoginName}
+    </update>
+    
+    <update id="personUpdate" parameterType="map">
+		update fl_tutor
+    	set
+    		introduce = #{introduce},
+			qq = #{qq},
+			webAddr = #{webAddr},
+			<!-- <if test="specialtyID != null and specialtyID != ''">
+				specialtyID = ${specialtyID},
+			</if> -->
+			<if test="select specialtyID from fl_specialty where specialtyName = #{specialtyName}">
+			specialtyID = (select specialtyID from fl_specialty where specialtyName = #{specialtyName}),
+			</if> 
+			res_interests = #{res_interests},
+			photo = #{photo}
+		where
+			loginName = #{loginName}
+    </update>
+    
+    
+    <!-- 按登录名删除 -->
+    <delete id="deleteByLoignname"  parameterType="String">
+    	delete from fl_user where loginName=#{loginName}
+    </delete>
+</mapper>

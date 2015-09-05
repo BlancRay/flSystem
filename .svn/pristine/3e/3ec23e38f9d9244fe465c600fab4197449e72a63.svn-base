@@ -1,0 +1,195 @@
+package cn.nwsuaf.action.admin;
+
+import java.util.HashMap;
+
+import com.opensymphony.xwork2.Action;
+
+import cn.nwsuaf.action.BaseAction;
+import cn.nwsuaf.dao.CourseDao;
+
+public class CourseAction extends BaseAction {
+	private CourseDao courseDao;
+	private HashMap<String, Object> courseList;
+	private HashMap<String, String> courseInfo;
+	private boolean success = true;
+	private String errMsg;
+	private String courseName;
+	private String courseType;
+	private String courseID;
+	private boolean isExist;
+//	private HashMap<String, Object> bcMap;
+	
+	public CourseAction(){
+		courseDao = new CourseDao();
+	}
+		
+	public String list(){
+		try {
+			courseList = courseDao.getCourseList(createWhere(), getPage(), getRows());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "list";
+	}
+
+	
+	/**
+	 * 待审核列表
+	 * @return
+	 */
+	public String checklist(){
+		try {
+			courseList = courseDao.getCourseList("checked=1", getPage(), getRows());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "checklist";
+	}
+	
+	/**
+	 * 审核
+	 * @return
+	 */
+	public String check(){
+		
+		return Action.SUCCESS;
+	}
+	
+	public String add(){
+		try {
+			return "edit";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public String edit(){
+		try {
+			courseInfo = (HashMap<String, String>) courseDao.getCourseById(courseID);
+//			bcMap = DataPacked.bigclassMap();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "edit";
+	}
+	
+	public String save(){
+		try {
+			courseDao.save(courseInfo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "save";
+	}
+	
+	public String delete(){
+		try {
+			courseDao.delOneCourse(courseID);
+		} catch (Exception e) {
+			e.printStackTrace();
+			success = false;
+		}
+		return "delete";
+	}
+
+	/**
+	 * 创建查询条件
+	 * @return
+	 */
+	private String createWhere(){
+		String where = "1=1 ";
+		if(courseType != null && !courseType.equals("请选择")){
+			where += "and courseType='" + courseType+"'";
+		}		
+		if(courseName != null && !"".equals(courseName)){
+			where += " and courseName='" + courseName+"'";
+		}
+		return where;
+	}
+	
+	
+	public String exist(){
+		try {
+			isExist = courseDao.courseIDIsExist(courseID);
+		}catch (Exception e) {
+			e.printStackTrace();
+			success = false;
+		}
+		return "exist";
+	}
+
+	public HashMap<String, Object> getCourseList() {
+		return courseList;
+	}
+
+	public void setCourseList(HashMap<String, Object> courseList) {
+		this.courseList = courseList;
+	}
+
+	public HashMap<String, String> getCourseInfo() {
+		return courseInfo;
+	}
+
+	public void setCourseInfo(HashMap<String, String> courseInfo) {
+		this.courseInfo = courseInfo;
+	}
+
+	public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+
+	public String getErrMsg() {
+		return errMsg;
+	}
+
+	public void setErrMsg(String errMsg) {
+		this.errMsg = errMsg;
+	}
+
+
+
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
+	public String getCourseType() {
+		return courseType;
+	}
+
+	public void setCourseType(String courseType) {
+		this.courseType = courseType;
+	}
+
+	public String getCourseID() {
+		return courseID;
+	}
+
+	public void setCourseID(String courseID) {
+		this.courseID = courseID;
+	}
+
+	public boolean isExist() {
+		return isExist;
+	}
+
+	public void setExist(boolean isExist) {
+		this.isExist = isExist;
+	}
+
+
+}

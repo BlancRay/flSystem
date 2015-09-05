@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tts">
+	<!-- 列表 -->
+	<select id="ttslist" parameterType="map" resultType="map">
+		SELECT
+		tts.ttsID,stu.uName AS stuname,bc1.bigClassName AS stubc,tutor.uName,bc2.bigClassName,tts.status,tts.tutorID,tts.studentID
+		FROM fl_tutortostudent tts
+		LEFT JOIN fl_tutor tutor ON tutor.loginName = tts.tutorID
+		LEFT JOIN
+		fl_student stu ON stu.loginName = tts.studentID
+		LEFT JOIN fl_specialty sp ON sp.specialtyID = tutor.specialtyID
+		LEFT JOIN
+		fl_bigclassname bc1 ON bc1.bigClassID = stu.bigclassId
+		LEFT JOIN
+		fl_bigclassname bc2 ON bc2.bigClassID = sp.bigClassID
+		<if test="where != null">
+			where ${where}
+		</if>
+		LIMIT #{offset},#{pgSize}
+	</select>
+	<!-- 记录条数 -->
+	<select id="ttsNum" parameterType="map" resultType="int">
+		select count(ttsID) from fl_tutortostudent tts
+left join fl_tutor tutor on tutor.loginName = tts.tutorID
+left join fl_student stu on stu.loginName = tts.studentID
+		<if test="where != null">
+			where ${where}
+		</if>
+	</select>
+	<!-- 按专业号删除 -->
+	<delete id="deleteByttsID" parameterType="Int">
+		delete from fl_tutortostudent where ttsID=#{ttsID}
+	</delete>
+	<update id="addByttsID" parameterType="Int">
+	update fl_tutortostudent set status = "3" where ttsID=#{ttsID}
+	</update>
+</mapper>

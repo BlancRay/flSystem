@@ -1,0 +1,12 @@
+只保留错误内容
+
+管理员添加学生时报错：
+Error updating database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '
+			sixGrade = '444.0',
+			uName = 'aaa',
+			creditscore = '444.0',
+			disciplin' at line 6
+### The error may involve student.stuInsert-Inline
+### The error occurred while setting parameters
+### SQL: insert fl_student      set       loginName = ?,       grade = ?,    className = ?,    bigClassID = ,    sixGrade = ?,    uName = ?,    creditscore = ?,    discipline = ?,          specialtyID = 4,         sex = ?
+可能是中文问题

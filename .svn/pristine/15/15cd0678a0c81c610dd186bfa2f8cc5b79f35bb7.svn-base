@@ -1,0 +1,94 @@
+package cn.nwsuaf.dao;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import cn.nwsuaf.util.DataPacked;
+
+public class TutorDao extends BaseDao {
+
+	public HashMap<String, Object> getTutorList(String where, int pg, int pgSize)
+			throws Exception {
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		param.put("where", where);
+		param.put("offset", (pg - 1) * pgSize);
+		param.put("pgSize", pgSize);
+		List<?> res = getList("tutor.tutorlist", param);
+		String num = getOne("tutor.tutorNum", param).toString();
+		param.clear();
+		param.put("recs", res);
+		param.put("num", num);
+		return param;
+	}
+
+	/**
+	 * 指定学生信息
+	 * @param loginName
+	 * @return map 学生详细信息
+	 * @throws Exception
+	 */
+	public Object getTutorById(String loginName) throws Exception{
+		return getOne("tutor.tutorByid", loginName);
+	}
+	
+	/**
+	 * 更新个人信息
+	 * @param personInfo
+	 * @throws Exception
+	 */
+	public void personUpdate(Object personInfo) throws Exception{
+		update("tutor.personUpdate", personInfo);
+	}
+	
+	/**
+	 * 保存修改或添加
+	 * @param stuInfo 学生信息
+	 * @throws Exception
+	 */
+	public void save(HashMap<String,String> tutorInfo) throws Exception{
+		String oldLogin = tutorInfo.get("oldLoginName");
+		if( oldLogin == null || "".equals(oldLogin)){
+			insert("user.addStudentUser",tutorInfo.get("loginName"));
+			insert("tutor.tutorInsert", tutorInfo);
+		}
+		else{
+			if(!oldLogin.equals(tutorInfo.get("loginName"))){
+				update("user.renameLogin", tutorInfo);
+			}
+			update("tutor.tutorUpdate", tutorInfo);
+		}
+	}
+	
+	public String importTutorInfo(ArrayList<String[]> dataList) throws Exception{
+		StringBuffer errMsg = new StringBuffer();
+		ArrayList<HashMap<String, Object>> smapList = DataPacked.stuInfoPacked(dataList);
+		int ok = 0;
+		int err = 0;
+		for(HashMap<String,Object> s:smapList){
+			try {
+				insert("user.addStudentUser",s.get("loginName"));
+				insert("student.stuInsert",s);
+				ok++;
+			} catch (Exception e) {
+				err++;
+				String m = e.getMessage();
+				if(m.contains("Duplicate entry")){
+					m = "学号已经存在...";
+				}
+				errMsg.append(String.format("%d.%s: %s\n",ok+err,s.get("loginName"),m));
+			}
+		}
+		errMsg.insert(0, String.format("成功导入%d条，有 %d条未导入\n\n", ok,err));
+		return errMsg.toString();
+	}
+	
+	/**
+	 * 按学号删除学生
+	 * @param stuId 学号
+	 * @throws Exception
+	 */
+	public void delOneTutor(String tutorId) throws Exception{
+		delete("tutor.deleteByLoignname", tutorId);
+	}
+}

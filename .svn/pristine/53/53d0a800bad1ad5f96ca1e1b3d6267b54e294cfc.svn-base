@@ -1,0 +1,279 @@
+package cn.nwsuaf.action.student;
+
+import java.util.HashMap;
+
+import com.opensymphony.xwork2.Action;
+
+import cn.nwsuaf.action.BaseAction;
+import cn.nwsuaf.dao.StudentDao;
+import cn.nwsuaf.dao.CourseDao;
+public class StudentAction extends BaseAction {
+	
+	private StudentDao stuDao;
+	private String loginName;
+	private HashMap<String,Object> self_Rec;
+	private HashMap<String,Object> research;
+	private HashMap<String,Object> channel;
+	private HashMap<String, Object> courseList;
+	private HashMap<String, Object> course;
+	private HashMap<String,Object> result = new  HashMap<String,Object>();
+	private String courseType;
+	private String courseName;
+	private String courseID;
+	private String type;
+	
+	@SuppressWarnings("unchecked")
+	public StudentAction(){
+		stuDao = new StudentDao();
+		HashMap<String, Object> usr = (HashMap<String,Object>)getSession().getAttribute("loginUser");
+		loginName = usr.get("loginName").toString();
+		result.put("success", true);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public String personInfo(){
+		try {
+			self_Rec = (HashMap<String, Object>) stuDao.getStuById(loginName);
+			Object pcourse = stuDao.pcourseList(loginName);
+			self_Rec.put("pcourse", pcourse);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "personInfo";
+	}
+	
+	/**
+	 * 更新个人信息
+	 * @return
+	 */
+	public String personSave(){
+		try {
+			stuDao.personUpdate(self_Rec);
+		} catch (Exception e) {
+			e.printStackTrace();
+			setError(e.getMessage());
+		}
+		return "jsonAction";
+	}
+	
+	/**
+	 * 自荐书
+	 * @return
+	 */
+	public String getSelfRec(){
+		try {
+			self_Rec = stuDao.getStuSelfRec(loginName);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "getSelfRec";
+	}
+
+	public String saveSelfRec(){
+		try {
+			 stuDao.updateStuSelfRec(self_Rec);
+		} catch (Exception e) {
+			e.printStackTrace();
+			setError(e.getMessage());
+		}
+		return "jsonAction";
+	}
+	
+	
+	public String channelSelect(){
+		try {
+			channel = (HashMap<String, Object>) stuDao.getStuchannelById(loginName);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "channelSelect";
+	}
+	public String channelselected(){
+		try {
+			stuDao.updatachannel(type,loginName);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "channelselected";
+	}
+	
+/*	public String channelCheck(){
+		try {
+			channel = (HashMap<String, Object>) stuDao.getStuchannelById(loginName);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "channelCheck";
+	}*/
+	
+	
+	@SuppressWarnings("unchecked")
+	public String major(){
+		try {
+			self_Rec = (HashMap<String, Object>) stuDao.getStuById(loginName);
+			Object pcourse = stuDao.pcourseList(loginName);
+			self_Rec.put("pcourse", pcourse);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "major";
+	}	
+	
+	
+	public String trainingprogram(){
+//		try {
+//			self_Rec = (HashMap<String, Object>) stuDao.getStuById(loginName);
+//			Object pcourse = stuDao.pcourseList(loginName);
+//			self_Rec.put("pcourse", pcourse);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return Action.ERROR;
+//		}
+		return "trainingprogram";
+	}
+	
+	public String subject(){
+		try {
+			course = stuDao.getCourse(loginName,getPage(), getRows());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "subject";
+	}
+	
+	public String research(){
+		try {
+			research = stuDao.getStuResearch(loginName);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "research";
+	}
+	
+	public String saveresearch(){
+		try {
+			 stuDao.updateStuResearch(research);
+		} catch (Exception e) {
+			e.printStackTrace();
+			setError(e.getMessage());
+		}
+		return "jsonAction";
+	}
+	
+	public String courselist() {
+		try {
+			courseList = stuDao.getCourseList(createWhere(), getPage(), getRows());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "courselist";
+		
+	}
+	private String createWhere(){
+		String where = "1=1 ";
+		if(courseType != null && !courseType.equals("请选择")){
+			where += "and courseType='" + courseType+"'";
+		}		
+		if(courseName != null && !"".equals(courseName)){
+			where += " and courseName='" + courseName+"'";
+		}
+		return where;
+	}
+	
+	public String courseadd(){
+		try {
+			 stuDao.updatacourse(loginName,courseID);
+		} catch (Exception e) {
+			e.printStackTrace();
+			setError(e.getMessage());
+		}
+		return "courseadd";
+	}
+	
+	
+	private void setError(String msg){
+		result.put("success", false);
+		result.put("errMsg", msg);
+	}
+	
+	public HashMap<String,Object> getSelf_Rec() {
+		return self_Rec;
+	}
+
+	public void setSelf_Rec(HashMap<String,Object> self_Rec) {
+		this.self_Rec = self_Rec;
+	}
+
+	public HashMap<String,Object> getResult() {
+		return result;
+	}
+
+	public void setResult(HashMap<String,Object> result) {
+		this.result = result;
+	}
+
+	public HashMap<String, Object> getChannel() {
+		return channel;
+	}
+
+	public void setChannel(HashMap<String, Object> channel) {
+		this.channel = channel;
+	}
+
+	public HashMap<String, Object> getCourseList() {
+		return courseList;
+	}
+
+	public void setCourseList(HashMap<String, Object> courseList) {
+		this.courseList = courseList;
+	}
+
+	public String getCourseType() {
+		return courseType;
+	}
+
+	public void setCourseType(String courseType) {
+		this.courseType = courseType;
+	}
+
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
+	public HashMap<String, Object> getCourse() {
+		return course;
+	}
+
+	public void setCourse(HashMap<String, Object> course) {
+		this.course = course;
+	}
+
+	public String getCourseID() {
+		return courseID;
+	}
+
+	public void setCourseID(String courseID) {
+		this.courseID = courseID;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+}

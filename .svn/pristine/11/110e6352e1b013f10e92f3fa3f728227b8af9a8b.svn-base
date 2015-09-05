@@ -1,0 +1,70 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%
+	pageContext.setAttribute("contextPath", request.getContextPath());
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="${contextPath}/css/main.css"></link>
+<link rel="stylesheet" href="${contextPath}/css/student.css"></link>
+<link rel="stylesheet"
+	href="${contextPath}/js/easyui/themes/metro/easyui.css"></link>
+<link rel="stylesheet" href="${contextPath}/js/easyui/themes/icon.css"></link>
+<script type="text/javascript" src="${contextPath}/js/jquery.min.js"></script>
+<script type="text/javascript"
+	src="${contextPath}/js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript"
+	src="${contextPath}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript">
+$(function() {
+	var type = $.trim($("#type").val());
+	$(".aplBtn").click(
+			function() {
+				
+				/* var tutorid = $(this).attr("tutorid"); */
+				$.messager.confirm('申请导师', '您确定要申请工号为“' + type
+						+ '”的导师吗?', function(r) {
+					if (r) {
+						$.post("stu_channelselected", {
+							channelType : type
+						}, function(data) {
+							if (data.success) {
+								location.reload();
+							} else {
+								$.messager.alert("错误", "申请失败...", "Error");
+							}
+						}, 'json');
+					}
+				});
+			});
+});
+</script>
+<title>${initParam.systemName}——选择通道</title>
+</head>
+<body>
+	<div class="center1000">
+		<div class="firstTitle">通道选择</div>
+		<div class="toolbar">
+			<div style="margin-top: 10px">学业成绩：六级成绩：${channel.sixGrade}</div>
+		</div>
+		<div class="center800">
+		<s:if test='channel.channel == null'>
+		<div style="padding: 20px;text-align: center;">
+			<s:select id="type" list="{'请选择','校内贯通培养','普通本科培养'}"
+				name="type" />
+			<a class="easyui-linkbutton" iconCls="icon-ok"
+				href="javascript:void(0)" onclick="aplBtn()">确定</a>
+		</div>
+		
+			当前选择状态：未选择
+			</s:if>
+			<s:else>
+			当前选择状态：${channel.channel}
+			</s:else>
+		</div>
+	</div>
+</body>
+</html>

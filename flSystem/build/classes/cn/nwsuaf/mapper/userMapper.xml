@@ -25,6 +25,14 @@
     	  role = "student"
     </insert>
     
+    <!-- 插入教师用户 -->
+    <insert id="addTutorUser" parameterType="string">
+    	insert into fl_user
+    	set 
+    	  loginname = #{tutorid},
+    	  passwd = password(#{tutorid}),
+    	  role = "tutor"
+    </insert>
     <!-- 检测用户名是否存在 -->
     <select id="loginNameIsExist" parameterType="String" resultType="int">
         select count(loginName) from fl_user where loginName = #{loginname}

@@ -1,0 +1,142 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="s" uri="/struts-tags"%>
+<%
+	pageContext.setAttribute("contextPath", request.getContextPath());
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css"
+	href="${contextPath}/js/easyui/themes/metro/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="${contextPath}/js/easyui/themes/icon.css">
+<link rel="stylesheet" type="text/css"
+	href="${contextPath}/css/main.css">
+<script type="text/javascript" src="${contextPath}/js/jquery.min.js"></script>
+<script type="text/javascript"
+	src="${contextPath}/js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript"
+	src="${contextPath}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript"
+	src="${contextPath}/js/kindeditor/kindeditor-all-min.js"></script>
+<script type="text/javascript" src="${contextPath}/js/fileupload.js"></script>
+<script type="text/javascript">
+	function goList(page, pgSize) {
+		location = "subject_list?page=" + page + "&rows=" + pgSize
+				+ getSearchParam();
+	}
+	function getSearchParam(){
+//	 	  var spec = $("#spec").val();
+//	 	  var grade = $("#grade").val();
+var bigClassID = $.trim($("#bigClassID").val());
+		  var bigClassName = $.trim($("#bigClassName").val());
+		  var param = "";
+		  if(bigClassID != ""){
+			  param += "&bigClassID=" + bigClassID;
+		  }
+		  if(bigClassName != ""){
+			  param += "&bigClassName=" + bigClassName;
+		  }
+		  return param;
+	  }
+	  
+	  function searchb(){
+		  var p = getSearchParam();
+		  if( p == ""){
+			  $.messager.alert('错误', "请输入筛选条件！！", 'Error');
+			  return;
+		  }
+		  location = "subject_list?page=1&rows=${rows}" + p;
+	  }
+	  
+	  function showAll(){
+		  $("#bigClassName").val("");
+		  $("#bigClassID").val("");
+		  location = "subject_list?page=1&rows=${rows}";
+	  }
+	  
+	  $(function(){
+		  //删除单个专业
+		  $(".delBtn").click(function(){
+			  var bigClassID = $(this).attr("bigClassID");
+			  $.messager.confirm('删除专业信息', '您确定要删除学科大类号为“'+ bigClassID +'”的学科信息吗?<br />这将会删除该学科的所有相关信息，且无法恢复...', function(r){
+					if (r){
+						$.post(
+							"subject_delete",
+							{bigClassID:bigClassID},
+							function(data){
+								if(data.success){
+									location.reload();
+								}
+								else{
+									$.messager.alert("错误","删除失败...","Error");
+								}
+							},
+							'json'
+						);
+					}
+				});
+		  });
+		  
+	  });
+</script>
+<title>课程信息</title>
+</head>
+<body>
+	<div class="center800">
+		<div class="firstTitle">学科大类信息列表</div>
+		<div class="toolbar">
+			<a class="easyui-linkbutton" iconCls="icon-add" href="subject_add">添加</a>
+			<div style="margin-top: 10px">
+				筛选条件：
+<%-- 				<s:select id="spec" list="specMap" listKey="value" listValue="key"
+					headerKey="-1" headerValue="所有专业" value="specId"></s:select>
+				<s:select id="grade" list="gradeList" headerKey="-1" listKey="grade"
+					listValue="grade" headerValue="所有年级" value="grade"></s:select> --%>
+<%-- 				类型：
+				<s:textfield id="courseType" name="courseType" size="16"></s:textfield> --%>
+				学科大类号：
+				<s:textfield id="bigClassID" name="bigClassID" size="12"></s:textfield>
+				学科大类名称：
+				<s:textfield id="bigClassName" name="bigClassName" size="12"></s:textfield>
+				<a class="easyui-linkbutton" iconCls="icon-search"
+					href="javascript:void(0)" onclick="searchb()">确定</a> <a
+					class="easyui-linkbutton" href="javascript:void(0)"
+					onclick="showAll()">显示所有</a>
+			</div>
+		</div>
+		<table class="listBorder" width="100%" cellspacing="0">
+			<tr>
+				<th width="80">学科大类号</th>
+				<th width="100">学科大类</th>
+				<th width="300">描述</th>
+				<th>操作</th>
+			</tr>
+			<s:iterator value="subjectList.recs" var="sub">
+				<tr>
+					<td>${sub.bigClassID }</td>
+					<td>${sub.bigClassName }</td>
+					<td>${sub.descript }</td>
+					<td><a class="easyui-linkbutton editBtn" iconCls="icon-edit"
+						href="subject_edit?bigClassID=${sub.bigClassID}">编辑</a> <a
+						class="easyui-linkbutton delBtn" iconCls="icon-cancel"
+						href="javascript:void(0)" bigClassID="${sub.bigClassID }">删除</a>
+				</tr>
+			</s:iterator>
+		</table>
+		<div class="footbar">
+			<div class="easyui-pagination"
+				data-options="
+                    total:${subjectList.num },
+                    pageSize:${rows},
+                    pageNumber:${page},
+                    onSelectPage:goList,
+                    onChangePageSize:goList,
+                    layout:['list','sep','first','prev','links','next','last']
+                "></div>
+		</div>
+	</div>
+</body>
+</html>

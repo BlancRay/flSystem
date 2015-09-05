@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tutorlist">
+	<!-- 导师列表 -->
+	<select id="getTutorListByPage" parameterType="map" resultType="map">
+		select tutor.*,sp.specialtyName from fl_tutor tutor
+		LEFT JOIN fl_specialty sp ON sp.specialtyID = tutor.specialtyID
+		LIMIT #{offset},#{pgSize}
+	</select>
+	<!-- 记录条数 -->
+	<select id="getCount" resultType="int">
+		select count(loginName) from
+		fl_tutor
+	</select>
+	<!-- <select id="getTutorListByName" resultType="TutorListBean" parameterType="uname"> 
+		select * from fl_tutor where uname = #{uname} </select> <select id="getTutorListBySpecialtyID" 
+		resultType="TutorListBean" parameterType="specialtyID"> select * from fl_tutor 
+		where specialtyID = #{specialtyID} </select> -->
+</mapper>

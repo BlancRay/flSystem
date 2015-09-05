@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tts"><!-- 内容重写 -->
+	<!-- 列表 -->
+    <select id="ttslist" parameterType="map" resultType="map">
+    	SELECT 
+		   spec.specialtyID,spec.bigClassID,spec.specialtyName,spec.descript,bc.bigClassName
+		FROM fl_specialty spec
+		LEFT JOIN fl_bigclassname bc ON bc.bigClassID = spec.bigClassID
+		<if test="where != null">
+			where ${where}
+		</if>
+		LIMIT #{offset},#{pgSize}
+    </select>
+    <!-- 记录条数 -->
+    <select id="ttsrNum" parameterType="map" resultType="int">
+    	select count(spec.specialtyID) from fl_specialty spec
+    	LEFT JOIN fl_bigclassname bc ON bc.bigClassID = spec.bigClassID
+    	<if test="where != null">
+			where ${where}
+		</if>
+    </select>
+    
+    <!-- 编辑 -->
+    <select id="ttsByid" parameterType="Int" resultType="map">
+    	SELECT 
+		   spec.*,bc.bigClassName
+		FROM fl_specialty spec
+		LEFT JOIN fl_bigclassname bc ON bc.bigClassID = spec.bigClassID
+		where spec.specialtyID = #{specialtyID}
+    </select>
+    
+    <!-- 添加 -->
+    <insert id="ttsInsert" parameterType="map">
+    	insert fl_specialty
+    	set
+    		bigClassID = #{bigClassID},
+			specialtyName = #{specialtyName},
+			descript = ${descript}
+    </insert>
+    
+    <!-- 更新 -->
+    <update id="ttsUpdate" parameterType="map">
+    	update fl_specialty
+    	set
+    		specialtyID = #{specialtyID},
+    		bigClassID = (select bigClassID from fl_bigclassname where bigClassName=#{bigClassName}),
+			specialtyName = #{specialtyName},
+			descript = ${descript}
+		where specialtyID = #{oldspecialtyID}
+    </update>
+    <!-- 按专业号删除 -->
+    <delete id="deleteByttsID"  parameterType="Int">
+    	delete from fl_specialty where specialtyID=#{specialtyID}
+    </delete>
+</mapper>

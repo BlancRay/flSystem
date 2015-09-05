@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<!-- 学生 -->
+<struts>
+	<package name="student" extends="default" namespace="/student">
+		<!-- 学生首页 -->
+		<action name="index">
+			<result>/student/index.jsp</result>
+		</action>
+		<!-- 文件上传 -->
+		<action name="file_*" class="cn.nwsuaf.util.FileUploadAction"
+			method="{1}">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 系统公告 -->
+		<action name="nt_*" class="cn.nwsuaf.action.notice.NtAction"
+			method="{1}">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+
+		<!-- 导师列表 -->
+		<action name="tutor_*" class="cn.nwsuaf.action.student.STutorAction"
+			method="{1}">
+			<result name="list">
+				/student/tutor_list.jsp
+			</result>
+			<result name="choice">
+				/student/tutor_choice.jsp
+			</result>
+			<result name="apply" type="json"></result>
+			<result name="delete" type="json"></result>
+		</action>
+		<action name="stu_*" class="cn.nwsuaf.action.student.StudentAction"
+			method="{1}">
+
+			<!-- 个人信息 -->
+			<result name="personInfo">
+				/student/personInfo.jsp
+			</result>
+			<result name="personSave">
+				/student/personInfo.jsp
+			</result>
+			<!-- 自荐书 -->
+			<result name="getSelfRec">
+				/student/self_rec.jsp
+			</result>
+			<result name="saveSelfRec">
+				/student/self_rec.jsp
+			</result>
+			<!-- 通道选择 -->
+			<result name="channelSelect">
+				/student/channelSelect.jsp
+			</result>
+			<result name="channelselected">
+			/student/channelSelect.jsp
+			</result>
+			<!-- 专业选择 -->
+			<result name="major">
+				/student/major.jsp
+			</result>
+			<!-- 查看培养方案 -->
+			<result name="trainingprogram">
+				/student/trainingprogram.jsp
+			</result>
+			<!-- 选择培养方案 -->
+			<result name="subject">
+				/student/subject.jsp
+			</result>
+			<!-- 科研训练 -->
+			<result name="research">
+				/student/research.jsp
+			</result>
+			<result name="saveresearch">
+				/student/research.jsp
+			</result>
+			<result name="courselist">
+				/student/course_list.jsp
+			</result>
+			<result name="courseadd">
+				/student/subject.jsp
+			</result>
+		</action>
+
+	</package>
+</struts>

@@ -1,0 +1,108 @@
+package cn.nwsuaf.action.student;
+
+import java.util.HashMap;
+import com.opensymphony.xwork2.Action;
+import cn.nwsuaf.action.BaseAction;
+import cn.nwsuaf.dao.TutorDao;
+import cn.nwsuaf.util.DataPacked;
+
+public class STutorAction extends BaseAction {
+	private TutorDao tutorDao;
+	private HashMap<String, Object> tutorList;
+	private String loginName;
+	private boolean success = true;
+	private String errMsg;	
+	private HashMap<String, Object> specMap;
+	
+	//筛选用
+	private int specId;
+	private String Name;
+	
+	
+	public STutorAction(){
+		tutorDao = new TutorDao();
+	}
+	
+	public String list(){
+		try {
+			tutorList = tutorDao.getTutorList(createWhere(), getPage(), getRows());
+//			specMap = DataPacked.specMap();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Action.ERROR;
+		}
+		return "list";
+	}
+	/**
+	 * 创建查询条件
+	 * @return
+	 */
+	private String createWhere(){
+		String where = "1=1 ";
+	/*	if(specId != 0){
+			where += "and stu.specialtyID=" + specId;
+		}
+*/
+		if(Name != null && !"".equals(Name)){
+			where += String.format(" and uName='%s'", Name);
+		}
+		return where;
+	}
+
+	public HashMap<String, Object> getTutorList() {
+		return tutorList;
+	}
+
+	public void setTutorList(HashMap<String, Object> tutorList) {
+		this.tutorList = tutorList;
+	}
+
+	public String getLoginName() {
+		return loginName;
+	}
+
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+
+	public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+
+	public String getErrMsg() {
+		return errMsg;
+	}
+
+	public void setErrMsg(String errMsg) {
+		this.errMsg = errMsg;
+	}
+
+	public HashMap<String, Object> getSpecMap() {
+		return specMap;
+	}
+
+	public int getSpecId() {
+		return specId;
+	}
+
+	public void setSpecId(int specId) {
+		this.specId = specId;
+	}
+
+	public String getName() {
+		return Name;
+	}
+
+	public void setName(String name) {
+		Name = name;
+	}
+
+	public void setSpecMap(HashMap<String, Object> specMap) {
+		this.specMap = specMap;
+	}
+
+}

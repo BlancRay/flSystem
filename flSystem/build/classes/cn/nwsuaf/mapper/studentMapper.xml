@@ -2,127 +2,234 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="student">
 	<!-- 列表 -->
-    <select id="stulist" parameterType="map" resultType="map">
-    	SELECT 
-		   stu.loginName,stu.uName,stu.sex,stu.className,stu.grade,stu.sixGrade,stu.checked,stu.discipline,stu.creditscore,bc.bigClassName,sp.specialtyName
+	<select id="stulist" parameterType="map" resultType="map">
+		SELECT
+		stu.loginName,stu.uName,stu.sex,stu.className,stu.grade,stu.sixGrade,stu.checked,stu.discipline,stu.creditscore,bc.bigClassName,sp.specialtyName
 		FROM fl_student stu
-		LEFT JOIN fl_bigclassname bc ON bc.bigClassID = stu.bigClassID
-		LEFT JOIN fl_specialty sp ON sp.specialtyID = stu.specialtyID
+		LEFT JOIN fl_bigclassname bc ON bc.bigClassID =
+		stu.bigClassID
+		LEFT JOIN fl_specialty sp ON sp.specialtyID =
+		stu.specialtyID
 		<if test="where != null">
 			where ${where}
 		</if>
 		LIMIT #{offset},#{pgSize}
-    </select>
-    <!-- 记录条数 -->
-    <select id="stuNum" parameterType="map" resultType="int">
-    	select count(loginName) from fl_student stu
-    	<if test="where != null">
+	</select>
+	<!-- 记录条数 -->
+	<select id="stuNum" parameterType="map" resultType="int">
+		select count(loginName) from fl_student stu
+		<if test="where != null">
 			where ${where}
 		</if>
-    </select>
-    
-    <!-- 编辑 -->
-    <select id="stuByid" parameterType="String" resultType="map">
-    	SELECT 
-		   stu.*,bc.bigClassName,sp.specialtyName
+	</select>
+
+	<!-- 编辑 -->
+	<select id="stuByid" parameterType="String" resultType="map">
+		SELECT
+		case specselected when 3 then '完成' when 2 then '导师审核' when 1 then '学院审核'
+		when 0 then '未完成'else 0 end as
+		specselected,stu.*,bc.bigClassName,sp.specialtyName
 		FROM fl_student stu
 		LEFT JOIN fl_specialty sp ON sp.specialtyID = stu.specialtyID
-		LEFT JOIN fl_bigclassname bc ON bc.bigClassID = stu.bigClassID
-		where stu.loginName = #{loginName}
-    </select>
-    
-    <!-- 添加 -->
-    <insert id="stuInsert" parameterType="map">
-    	insert fl_student
-    	set
-    		loginName = #{loginName},
-    		grade = #{grade},
-			className = #{className},
-			bigClassID = ${bigClassID},
-			sixGrade = #{sixGrade},
-			uName = #{uName},
-			creditscore = #{creditscore},
-			discipline = #{discipline},
-			<if test="specialtyID != null and specialtyID != ''">
-				specialtyID = ${specialtyID},
-			</if>
-			sex = #{sex}
-			
-    </insert>
-    
-    <!-- 更新 -->
-    <update id="stuUpdate" parameterType="map">
-    	update fl_student
-    	set
-    		loginName = #{loginName},
-    		grade = #{grade},
-			className = #{className},
-			bigclassId = ${bigclassId},
-			sixGrade = #{sixGrade},
-			uName = #{uName},
-			creditscore = #{creditscore},
-			discipline = #{discipline},
-			<if test="specialtyID != null and specialtyID != ''">
-				specialtyID = ${specialtyID},
-			</if>
-			sex = #{sex}
-		where loginName = #{oldLoginName}
-    </update>
-    
-    <update id="personUpdate" parameterType="map">
-		update fl_student
-    	set
-    		`email`= #{email},
-			`qq`= #{qq},
-			`webAddr`= #{webAddr},
-			`phone` = #{phone}
+		LEFT JOIN
+		fl_bigclassname bc ON bc.bigClassID = stu.bigClassID
 		where
-			loginName = #{loginName}
-    </update>
-    
-    <!-- 按条件删除 -->
-    <delete id="deleteByWhere" parameterType="String">
-    	
-    </delete>
-    
-    <!-- 按登录名删除 -->
-    <delete id="deleteByLoignname"  parameterType="String">
-    	delete from fl_user where loginName=#{loginname}
-    </delete>
-    
-    <!-- 年级列表 -->
-    <select id="gradeList" resultType="map">
-		SELECT grade FROM fl_student GROUP BY grade ORDER BY grade DESC        
-    </select>
-    
-    <!-- 已修课程导入 -->
-    <insert id="insertpcourse" parameterType="map">
-        insert into fl_pcourse
-        set
-        	`loginName`=#{loginName},
-			`courseID`=#{courseID},
-			`score`=#{score},
-			compulsory=#{compulsory}
-        	
-    </insert>
-    <select id="pcourseList" parameterType="string" resultType="map">
-        SELECT p.`courseID`,p.`score`,c.`courseName`,c.credit,c.`courseType`,c.`courseHours` FROM `fl_pcourse` p
-		LEFT JOIN `fl_courses` c ON c.`courseID` = p.`courseID`
+		stu.loginName = #{loginName}
+	</select>
+
+	<!-- 添加 -->
+	<insert id="stuInsert" parameterType="map">
+		insert fl_student
+		set
+		loginName = #{loginName},
+		grade = #{grade},
+		className = #{className},
+		bigClassID = ${bigClassID},
+		sixGrade =
+		#{sixGrade},
+		uName = #{uName},
+		creditscore = #{creditscore},
+		discipline =
+		#{discipline},
+		<if test="specialtyID != null and specialtyID != ''">
+			specialtyID = ${specialtyID},
+		</if>
+		sex = #{sex}
+
+	</insert>
+
+	<!-- 更新 -->
+	<update id="stuUpdate" parameterType="map">
+		update fl_student
+		set
+		loginName = #{loginName},
+		grade = #{grade},
+		className = #{className},
+		bigclassId = ${bigclassId},
+		sixGrade =
+		#{sixGrade},
+		uName = #{uName},
+		creditscore = #{creditscore},
+		discipline =
+		#{discipline},
+		<if test="specialtyID != null and specialtyID != ''">
+			specialtyID = ${specialtyID},
+		</if>
+		sex = #{sex}
+		where loginName = #{oldLoginName}
+	</update>
+
+	<update id="personUpdate" parameterType="map">
+		update fl_student
+		set
+		`email`= #{email},
+		`qq`= #{qq},
+		`webAddr`= #{webAddr},
+		`phone` = #{phone}
+		where
+		loginName = #{loginName}
+	</update>
+
+	<!-- 按条件删除 -->
+	<delete id="deleteByWhere" parameterType="String">
+
+	</delete>
+
+	<!-- 按登录名删除 -->
+	<delete id="deleteByLoignname" parameterType="String">
+		delete from fl_user
+		where loginName=#{loginname}
+	</delete>
+
+	<!-- 年级列表 -->
+	<select id="gradeList" resultType="map">
+		SELECT grade FROM fl_student
+		GROUP BY grade ORDER BY grade DESC
+	</select>
+
+	<!-- 已修课程导入 -->
+	<insert id="insertpcourse" parameterType="map">
+		insert into fl_pcourse
+		set
+		`loginName`=#{loginName},
+		`courseID`=#{courseID},
+		`score`=#{score},
+		compulsory=#{compulsory}
+
+	</insert>
+	<select id="pcourseList" parameterType="string" resultType="map">
+		SELECT
+		p.`courseID`,p.`score`,c.`courseName`,c.credit,c.`courseType`,c.`courseHours`
+		FROM `fl_pcourse` p
+		LEFT JOIN `fl_courses` c ON c.`courseID` =
+		p.`courseID`
 		WHERE p.`loginName` = #{loginName}
-    </select>
-    
-    
-    <!-- 自荐书 -->
-    <select id="getSelfRec" parameterType="String" resultType="map">
-        SELECT `loginName`,`self_rec`,`checked` FROM `fl_student` WHERE `loginName` = #{loginName}
-    </select>
-    <update id="updateSelfRec" parameterType="map">
-        update fl_student
-        set
-           self_rec = #{self_rec},
-           checked = #{checked}
-        where
-          `loginName` = #{loginName} 
-    </update>
-    
+	</select>
+
+
+	<!-- 自荐书 -->
+	<select id="getSelfRec" parameterType="String" resultType="map">
+		SELECT `loginName`,`self_rec`,`checked` FROM `fl_student` WHERE
+		`loginName` = #{loginName}
+	</select>
+	<update id="updateSelfRec" parameterType="map">
+		update fl_student
+		set
+		self_rec = #{self_rec},
+		checked = #{checked}
+		where
+		`loginName` =
+		#{loginName}
+	</update>
+
+	<select id="getStuchannelById" parameterType="String"
+		resultType="map">
+		SELECT channel,sixGrade FROM fl_student WHERE loginName
+		=#{loginName}
+	</select>
+
+	<!-- 取消申请 -->
+	<delete id="deletetutor" parameterType="map">
+		delete from
+		fl_tutortostudent where tutorID = #{tutorID} and studentID =
+		#{loginName}
+	</delete>
+	<!-- 申请导师 -->
+	<insert id="apply" parameterType="map">
+		insert into fl_tutortostudent
+		set
+		tutorID = #{tutorID},
+		studentID = #{loginName}
+	</insert>
+
+	<select id="choicelist" parameterType="String" resultType="map">
+		SELECT
+		tutor.uName,case status when 1 then '审核' else 0 end as status,tts.tutorID
+		FROM fl_tutortostudent tts
+		LEFT JOIN fl_tutor tutor ON tutor.loginName =
+		tts.tutorID
+		where tts.studentID = #{loginName}
+	</select>
+	<!-- 记录条数 -->
+	<select id="choiceNum" parameterType="String" resultType="int">
+		select
+		count(ttsID) from fl_tutortostudent where studentID = #{loginName}
+	</select>
+
+	<select id="courselist" parameterType="map" resultType="map">
+		SELECT
+		cou.*,tc.semester
+		FROM fl_courses cou
+		LEFT JOIN fl_trainplan_courses tc
+		ON tc.courseID = cou.courseID
+		where tc.studentID=#{loginName}
+		LIMIT
+		#{offset},#{pgSize}
+	</select>
+	<!-- 记录条数 -->
+	<select id="courseNum" parameterType="map" resultType="int">
+		SELECT
+		count(trainCourseID) FROM fl_trainplan_courses
+		where studentID=
+		#{loginName}
+	</select>
+	<insert id="addcourse" parameterType="map">
+		insert into
+		fl_trainplan_courses
+		set
+		courseID = #{courseID},
+		studentID = #{loginName}
+	</insert>
+	<select id="getResearch" parameterType="String" resultType="map">
+		SELECT tp.studentID,rts.content,rts.isSubmit
+		FROM fl_researchtrainstage
+		rts
+		LEFT JOIN fl_researchtrain rt ON
+		rt.researchTrainID=rts.researchTrainID
+		LEFT JOIN fl_trainplan tp ON
+		tp.tranPlanID=rt.tranPlanID
+		WHERE
+		tp.studentID= #{loginName}
+	</select>
+	<update id="updateResearch" parameterType="map">
+		update
+		fl_researchtrainstage rts
+		set
+		content = #{content},
+		isSubmit =
+		#{isSubmit}
+		LEFT JOIN fl_researchtrain rt ON
+		rt.researchTrainID=rts.researchTrainID
+		LEFT JOIN fl_trainplan tp ON
+		tp.tranPlanID=rt.tranPlanID
+		where
+		studentID = #{loginName}
+	</update>
+	<update id="channelupdata" parameterType="map">
+		update fl_student
+		set
+		channel = #{channel}
+		where
+		loginName = #{loginName}
+	</update>
 </mapper>

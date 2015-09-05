@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="subject">
+	<!-- 列表 -->
+    <select id="subjectlist" parameterType="map" resultType="map">
+    	SELECT 
+		   *
+		FROM fl_bigclassname
+		<if test="where != null">
+			where ${where}
+		</if>
+		LIMIT #{offset},#{pgSize}
+    </select>
+    <!-- 记录条数 -->
+    <select id="subjectNum" parameterType="map" resultType="int">
+    	select count(bigClassID) from fl_bigclassname
+    	<if test="where != null">
+			where ${where}
+		</if>
+    </select>
+    
+    <!-- 编辑 -->
+    <select id="subjectByid" parameterType="Int" resultType="map">
+    	SELECT 
+		   *
+		FROM fl_bigclassname
+		where bigClassID = #{bigClassID}
+    </select>
+    
+    <!-- 添加 -->
+    <insert id="subjectInsert" parameterType="map">
+    	insert fl_bigclassname
+    	set
+    		bigClassID = #{bigClassID},
+			bigClassName = #{bigClassName},
+			descript = #{descript}
+    </insert>
+    
+    <!-- 更新 -->
+    <update id="subjectUpdate" parameterType="map">
+    	update fl_bigclassname
+    	set
+    		bigClassID = #{bigClassID},
+			bigClassName = #{bigClassName},
+			descript = #{descript}
+		where bigClassID = #{oldsubjectID}
+    </update>
+    
+    <!-- 按条件删除 -->
+    <delete id="deleteByWhere" parameterType="String">
+    	
+    </delete>
+    
+    <!-- 按专业号删除 -->
+    <delete id="deleteBysubjectID"  parameterType="Int">
+    	delete from fl_bigclassname where bigClassID=#{bigClassID}
+    </delete>
+    
+        <!-- 检测用户名是否存在 -->
+    <select id="bigClassIDIsExist" parameterType="int" resultType="int">
+        select count(bigClassID) from fl_bigclassname where bigClassID = #{bigClassID}
+    </select>
+</mapper>

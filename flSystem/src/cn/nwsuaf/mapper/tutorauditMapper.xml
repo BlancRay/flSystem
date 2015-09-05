@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tutoraudit">
+	<!-- 专业 -->
+	<select id="major" parameterType="map" resultType="map">
+    	select tutor.*,sp.specialtyName from fl_tutor tutor
+		LEFT JOIN fl_specialty sp ON sp.specialtyID = tutor.specialtyID
+		<if test="where != null">
+			where ${where}
+		</if>
+		LIMIT #{offset},#{pgSize}
+    </select>
+    <!-- 科研训练 -->
+    <select id="research" parameterType="map" resultType="int">
+    	select count(loginName) from fl_tutor
+    	<if test="where != null">
+			where ${where}
+		</if>
+    </select>
+    
+    <!-- 培养计划 -->
+    <select id="tg" parameterType="String" resultType="map">
+    	SELECT 
+		   tutor.*,sp.specialtyName
+		from fl_tutor tutor
+		LEFT JOIN fl_specialty sp ON sp.specialtyID = tutor.specialtyID
+		where tutor.loginName = #{loginName}
+    </select>
+    <!-- 培养通道 -->
+    <select id="channel" parameterType="String" resultType="map">
+    	SELECT 
+		   tutor.*,sp.specialtyName
+		from fl_tutor tutor
+		LEFT JOIN fl_specialty sp ON sp.specialtyID = tutor.specialtyID
+		where tutor.loginName = #{loginName}
+    </select>
+    
+</mapper>

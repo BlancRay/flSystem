@@ -23,12 +23,59 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<!-- 学生列表 -->
 		<action name="student_*" class="cn.nwsuaf.action.tutor.TStudentAction"
 			method="{1}">
-			<result type="json">
-				<param name="root">result</param>
+			<result name="list"><!-- 所招生学生列表 -->
+				/tutor/student_list.jsp
+			</result>
+			<result name="confirm"><!-- 待招生学生列表 -->
+				/tutor/student_confirm.jsp
+			</result>
+			<result name="apply" type="json"></result>
+			<result name="reject" type="json"></result>
+		</action>
+		
+		<!-- 审核 -->
+		<action name="audit_*" class="cn.nwsuaf.action.tutor.AuditAction"
+			method="{1}">
+			<!-- 专业 -->
+			<result name="major">
+				/tutor/audit_major.jsp
+			</result>
+			<!-- 科研训练-->
+			<result name="reasearch">
+				/tutor/audit_reasearch.jsp
+			</result>
+			<!-- 培养通道 -->
+			<result name="channel">
+				/tutor/audit_channel.jsp
+			</result>
+			<!-- 培养计划 -->
+			<result name="tg">
+				/tutor/audit_tg.jsp
 			</result>
 		</action>
+		<action name="tutor_*" class="cn.nwsuaf.action.tutor.TutorAction"
+		method="{1}">
+			
+			<!-- 个人信息 -->
+			<result name="personInfo">
+				/tutor/personInfo.jsp
+			</result>
+			<result name="personSave">
+				/tutor/personInfo.jsp
+			</result>
+			<!-- 自荐书 -->
+			<result name="getSelfRec">
+				/tutor/self_rec.jsp
+			</result>
+			<result name="saveSelfRec">
+				/tutor/self_rec.jsp
+			</result>
+		</action>
+		
+		<!--用户信息 -->
 		<action name="user_*" class="cn.nwsuaf.action.admin.UserAction"
 			method="{1}">
 			<result name="exist" type="json" />

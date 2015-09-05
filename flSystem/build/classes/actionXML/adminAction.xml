@@ -4,29 +4,32 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 <!-- 管理员 -->
 <struts>
-	 <package name="admin" extends="default" namespace="/admin">
-	 	<!-- 管理首页 -->
+	<package name="admin" extends="default" namespace="/admin">
+		<!-- 管理首页 -->
 		<action name="index">
 			<result>/admin/index.jsp</result>
 		</action>
 		<!-- 文件上传 -->
-		<action name="file_*" class="cn.nwsuaf.util.FileUploadAction" method="{1}">
+		<action name="file_*" class="cn.nwsuaf.util.FileUploadAction"
+			method="{1}">
 			<result type="json">
 				<param name="root">result</param>
 			</result>
 		</action>
 		<!-- 系统公告 -->
-		<action name="notice_*" class="cn.nwsuaf.action.admin.NoticeAdminAction" method="{1}">
+		<action name="notice_*" class="cn.nwsuaf.action.admin.NoticeAdminAction"
+			method="{1}">
 			<result type="json">
 				<param name="root">result</param>
 			</result>
 		</action>
-		
+
 		<!-- 学生信息管理 -->
-		<action name="student_*" class="cn.nwsuaf.action.admin.StudentAction" method="{1}">
+		<action name="student_*" class="cn.nwsuaf.action.admin.StudentAction"
+			method="{1}">
 			<result name="list">
 				/admin/student/student_list.jsp
-			</result>			
+			</result>
 			<result name="checklist">
 				/admin/student/student_check.jsp
 			</result>
@@ -36,15 +39,25 @@
 			<result name="save" type="redirect">
 				/admin/student/student_list
 			</result>
-			<result name="delete"  type="json"></result>
+			<result name="pdf">
+				/admin/student/student_pdf.jsp
+			</result>
+			<result name="exist" type="json" />
+			<result name="delete" type="json"></result>
+			<result name="resetPasswd" type="json"></result>
 			<result name="upload" type="json"></result>
+			<result name="pcupload" type="json"></result>
 		</action>
-		
+
 		<!-- 专业信息管理 -->
-		<action name="major_*" class="cn.nwsuaf.action.admin.MajorAction" method="{1}">
+		<action name="major_*" class="cn.nwsuaf.action.admin.MajorAction"
+			method="{1}">
 			<result name="list">
 				/admin/BaseInfo/major/major_list.jsp
-			</result>			
+			</result>
+			<result name="pdf">
+				/admin/BaseInfo/major/major_pdf.jsp
+			</result>
 			<result name="checklist">
 				/admin/BaseInfo/major/major_check.jsp
 			</result>
@@ -54,30 +67,163 @@
 			<result name="save" type="redirect">
 				/admin/BaseInfo/major/major_list
 			</result>
-			<result name="delete"  type="json"></result>
+
+			<result name="exist" type="json" />
+			<result name="delete" type="json"></result>
 			<result name="upload" type="json"></result>
 		</action>
-		
+
+		<!-- 课程信息管理 -->
+		<action name="course_*" class="cn.nwsuaf.action.admin.CourseAction"
+			method="{1}">
+			<result name="list">
+				/admin/BaseInfo/course/course_list.jsp
+			</result>
+			<result name="checklist">
+				/admin/BaseInfo/course/course_check.jsp
+			</result>
+			<result name="edit">
+				/admin/BaseInfo/course/course_edit.jsp
+			</result>
+			<result name="save" type="redirect">
+				/admin/BaseInfo/course/course_list
+			</result>
+			<result name="pdf">
+				/admin/BaseInfo/course/course_pdf.jsp
+			</result>
+			<result name="exist" type="json" />
+			<result name="delete" type="json"></result>
+			<result name="upload" type="json"></result>
+		</action>
+
+		<!-- 学科大类信息管理 -->
+		<action name="subject_*" class="cn.nwsuaf.action.admin.SubjectAction"
+			method="{1}">
+			<result name="list">
+				/admin/BaseInfo/subject/subject_list.jsp
+			</result>
+			<result name="checklist">
+				/admin/BaseInfo/subject/subject_check.jsp
+			</result>
+			<result name="edit">
+				/admin/BaseInfo/subject/subject_edit.jsp
+			</result>
+			<result name="save" type="redirect">
+				/admin/BaseInfo/subject/subject_list
+			</result>
+			<result name="pdf">
+				/admin/BaseInfo/subject/subject_pdf.jsp
+			</result>
+			<result name="exist" type="json" />
+			<result name="delete" type="json"></result>
+			<result name="upload" type="json"></result>
+		</action>
+
+		<!-- 导师信息管理 -->
+		<action name="tutor_*" class="cn.nwsuaf.action.admin.TutorAction"
+			method="{1}">
+			<result name="list">
+				/admin/tutor/tutor_list.jsp
+			</result>
+			<result name="pdf">
+				/admin/tutor/tutor_pdf.jsp
+			</result>
+			<result name="edit">
+				/admin/tutor/tutor_edit.jsp
+			</result>
+			<result name="save" type="redirect">
+				/admin/tutor/tutor_list
+			</result>
+			<result name="exist" type="json" />
+			<result name="delete" type="json"></result>
+			<result name="upload" type="json"></result>
+		</action>
+
+		<!-- 互选信息管理 -->
+		<action name="tts_*" class="cn.nwsuaf.action.admin.TtsAction"
+			method="{1}">
+			<result name="list">
+				/admin/BaseInfo/tts/tts_list.jsp
+			</result>
+			<result name="pdf">
+				/admin/BaseInfo/tts/tts_pdf.jsp
+			</result>
+			<result name="exist" type="json" />
+			<result name="add" type="json"></result>
+			<result name="delete" type="json"></result>
+		</action>
+
 		<!-- 用户信息 -->
-		<action name="user_*" class="cn.nwsuaf.action.admin.UserAction" method="{1}">
-			<result name="exist" type="json" />		    
+		<action name="user_*" class="cn.nwsuaf.action.admin.UserAction"
+			method="{1}">
+			<result name="exist" type="json" />
 		</action>
-		
+
 		<!-- 系统控制 -->
-		<action name="control_*" class="cn.nwsuaf.action.admin.SystemControlAction" method="{1}">
-		    <result name="eachSelectStart">
-		        /admin/control/eachselect.jsp
-		    </result>
-		    <result name="channelSelect">
-		        /admin/control/channelselect.jsp
-		    </result>
-		    <result name="eachSelectInfo">
-		        /admin/control/eachSelectInfo.jsp
-		    </result>
-		    <result name="channelSelectInfo">
-		        /admin/control/channelSelectInfo.jsp
-		    </result>
-		    <result name="adminCheckSpec" type="json"></result>
+		<action name="control_*" class="cn.nwsuaf.action.admin.SystemControlAction"
+			method="{1}">
+			<result name="eachSelectStart">
+				/admin/control/eachselect.jsp
+			</result>
+			<result name="channelSelect">
+				/admin/control/channelselect.jsp
+			</result>
+			<result name="eachSelectInfo">
+				/admin/control/eachSelectInfo.jsp
+			</result>
+			<result name="channelSelectInfo">
+				/admin/control/channelSelectInfo.jsp
+			</result>
+			<result name="adminCheckSpec" type="json"></result>
 		</action>
-    </package>
+		<!-- pdf下载 -->
+		<action name="pdfDown_tutor" class="cn.nwsuaf.action.admin.PDFDown_tutor">
+			<result type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="contentDisposition">attachment;fileName="${fileName}"</param>
+				<param name="inputName">downloadFile</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="pdfDown_stu" class="cn.nwsuaf.action.admin.PDFDown_stu">
+			<result type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="contentDisposition">attachment;fileName="${fileName}"</param>
+				<param name="inputName">downloadFile</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="pdfDown_course" class="cn.nwsuaf.action.admin.PDFDown_course">
+			<result type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="contentDisposition">attachment;fileName="${fileName}"</param>
+				<param name="inputName">downloadFile</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="pdfDown_major" class="cn.nwsuaf.action.admin.PDFDown_major">
+			<result type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="contentDisposition">attachment;fileName="${fileName}"</param>
+				<param name="inputName">downloadFile</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="pdfDown_tts" class="cn.nwsuaf.action.admin.PDFDown_tts">
+			<result type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="contentDisposition">attachment;fileName="${fileName}"</param>
+				<param name="inputName">downloadFile</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="pdfDown_subject" class="cn.nwsuaf.action.admin.PDFDown_subject">
+			<result type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="contentDisposition">attachment;fileName="${fileName}"</param>
+				<param name="inputName">downloadFile</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+	</package>
 </struts>
